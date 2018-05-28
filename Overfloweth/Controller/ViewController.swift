@@ -49,7 +49,8 @@ class ViewController: UIViewController {
         rankLabel.text = drewCard.rank
         nameLabel.text = drewCard.actionName
         descriptionLabel.text = drewCard.actionDescription
-        
+        var cardView: CardView = CardView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), card: drewCard)
+        view.addSubview(cardView)
         deck.remove(at: randCard)
         
     }
