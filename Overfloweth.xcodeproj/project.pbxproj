@@ -10,9 +10,11 @@
 		28B0D84420BBEAE4003BAE81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */; };
 		28B0D84620BBEAE4003BAE81 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0D84520BBEAE4003BAE81 /* ViewController.swift */; };
 		28B0D84920BBEAE4003BAE81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B0D84720BBEAE4003BAE81 /* Main.storyboard */; };
-		28B0D84C20BBEAE4003BAE81 /* Overfloweth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28B0D84A20BBEAE4003BAE81 /* Overfloweth.xcdatamodeld */; };
 		28B0D84E20BBEAE4003BAE81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28B0D84D20BBEAE4003BAE81 /* Assets.xcassets */; };
 		28B0D85120BBEAE4003BAE81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B0D84F20BBEAE4003BAE81 /* LaunchScreen.storyboard */; };
+		28B0D85D20BBFFEC003BAE81 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0D85C20BBFFEC003BAE81 /* Card.swift */; };
+		28B0D86020BC0608003BAE81 /* Cards.json in Resources */ = {isa = PBXBuildFile; fileRef = 28B0D85F20BC0608003BAE81 /* Cards.json */; };
+		28B0D86420BC3957003BAE81 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0D86320BC3957003BAE81 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +22,12 @@
 		28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28B0D84520BBEAE4003BAE81 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		28B0D84820BBEAE4003BAE81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		28B0D84B20BBEAE4003BAE81 /* Overfloweth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Overfloweth.xcdatamodel; sourceTree = "<group>"; };
 		28B0D84D20BBEAE4003BAE81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28B0D85020BBEAE4003BAE81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28B0D85220BBEAE4003BAE81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28B0D85C20BBFFEC003BAE81 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		28B0D85F20BC0608003BAE81 /* Cards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Cards.json; path = ../../../Desktop/Cards.json; sourceTree = "<group>"; };
+		28B0D86320BC3957003BAE81 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,41 @@
 		28B0D84220BBEAE4003BAE81 /* Overfloweth */ = {
 			isa = PBXGroup;
 			children = (
+				28B0D86220BC3927003BAE81 /* Controller */,
+				28B0D86120BC3921003BAE81 /* View */,
+				28B0D85B20BBFFDF003BAE81 /* Model */,
 				28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */,
-				28B0D84520BBEAE4003BAE81 /* ViewController.swift */,
 				28B0D84720BBEAE4003BAE81 /* Main.storyboard */,
+				28B0D85F20BC0608003BAE81 /* Cards.json */,
 				28B0D84D20BBEAE4003BAE81 /* Assets.xcassets */,
 				28B0D84F20BBEAE4003BAE81 /* LaunchScreen.storyboard */,
 				28B0D85220BBEAE4003BAE81 /* Info.plist */,
-				28B0D84A20BBEAE4003BAE81 /* Overfloweth.xcdatamodeld */,
 			);
 			path = Overfloweth;
+			sourceTree = "<group>";
+		};
+		28B0D85B20BBFFDF003BAE81 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				28B0D85C20BBFFEC003BAE81 /* Card.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		28B0D86120BC3921003BAE81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28B0D86320BC3957003BAE81 /* CardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		28B0D86220BC3927003BAE81 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28B0D84520BBEAE4003BAE81 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +159,7 @@
 				28B0D85120BBEAE4003BAE81 /* LaunchScreen.storyboard in Resources */,
 				28B0D84E20BBEAE4003BAE81 /* Assets.xcassets in Resources */,
 				28B0D84920BBEAE4003BAE81 /* Main.storyboard in Resources */,
+				28B0D86020BC0608003BAE81 /* Cards.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +172,8 @@
 			files = (
 				28B0D84620BBEAE4003BAE81 /* ViewController.swift in Sources */,
 				28B0D84420BBEAE4003BAE81 /* AppDelegate.swift in Sources */,
-				28B0D84C20BBEAE4003BAE81 /* Overfloweth.xcdatamodeld in Sources */,
+				28B0D86420BC3957003BAE81 /* CardView.swift in Sources */,
+				28B0D85D20BBFFEC003BAE81 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,19 +356,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		28B0D84A20BBEAE4003BAE81 /* Overfloweth.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				28B0D84B20BBEAE4003BAE81 /* Overfloweth.xcdatamodel */,
-			);
-			currentVersion = 28B0D84B20BBEAE4003BAE81 /* Overfloweth.xcdatamodel */;
-			path = Overfloweth.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 28B0D83820BBEAE4003BAE81 /* Project object */;
 }
