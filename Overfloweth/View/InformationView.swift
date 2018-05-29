@@ -11,14 +11,16 @@ import UIKit
 class InformationView: UIView {
     var actionNameLabel: UILabel
     var actionDescLabel: UILabel
-    //var rankLabel: UILabel
-    //var suitImageView: UIImageView
+    var rankLabel: UILabel
+    var suitImageView: UIImageView
     
     init(frame: CGRect, card: Card) {
-        actionNameLabel = UILabel(frame: CGRect(x: frame.width - 175, y: 25, width: 150, height: 40))
+        actionNameLabel = UILabel(frame: CGRect(x: frame.width - 175, y: 25, width: 150, height: 25))
         actionDescLabel = UILabel(frame: CGRect(x: 25, y: 150, width: frame.width - 50, height: 100))
-        //self.bottomText = UILabel(frame: CGRect(x: frame.width - 75, y: frame.height - 75, width: 50, height: 50))
-        //self.bottomSuit = UIImageView(frame: CGRect(x: frame.width - 63.5, y: frame.height - 100, width: 25, height: 25))
+        rankLabel = UILabel(frame: CGRect(x: 25, y: 25, width: 25, height: 25))
+        // TODO: get proper image size (18 ins story board)
+        suitImageView = UIImageView(frame: CGRect(x: 25 + rankLabel.frame.width + 10, y: 25, width: 25, height: 25))
+        
         super.init(frame: frame)
         self.actionNameLabel.text = card.actionName
         self.actionNameLabel.textColor = UIColor.white
@@ -29,13 +31,17 @@ class InformationView: UIView {
         self.actionDescLabel.textAlignment = NSTextAlignment.left
         self.actionDescLabel.numberOfLines = 0
         self.actionDescLabel.alpha = 0
-
+        
+        self.rankLabel.text = card.rank
+        self.rankLabel.textColor = UIColor.white
+        
 
         // TODO: set text and size
         self.backgroundColor = UIColor(white: 0, alpha: 0.75)
         
         self.addSubview(actionNameLabel)
         self.addSubview(actionDescLabel)
+        self.addSubview(rankLabel)
     }
     
     public func AnimateInUI ()
