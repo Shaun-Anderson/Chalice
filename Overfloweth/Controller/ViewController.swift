@@ -15,24 +15,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var TopRank: UILabel!
-    @IBOutlet weak var TopSuit: UIImageView!
-    @IBOutlet weak var BottomSuit: UIImageView!
-    @IBOutlet weak var BottomRank: UILabel!
-    
     var deck = [Card]()
-    @IBOutlet weak var cardView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cardView.layer.cornerRadius = 10;
         rankLabel.frame = CGRect(x: 25, y: 25, width: 25, height: 25)
         //nameLabel.frame = CGRect(x: InformationView.frame.width - nameLabel.frame.width, y: 25, width: 300, height: 25)
         // Do any additional setup after loading the view, typically from a nib.
-        TopSuit.tintColor = UIColor.red
         deck = loadJson(filename: "Cards") as! [Card]
-        BottomRank.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
-        BottomSuit.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
         DrawCard()
     }
     
@@ -40,17 +30,15 @@ class ViewController: UIViewController {
         let randCard: Int = Int(arc4random_uniform(UInt32(deck.count)))
         let drewCard: Card = deck[randCard]
         print("Drew \(randCard): \(drewCard.rank)")
-        // Card UI
-        TopRank.text = drewCard.rank
-        TopSuit.image = UIImage(named: (drewCard.suit?.rawValue)!)
-        BottomRank.text = drewCard.rank
-        BottomSuit.image = UIImage(named: (drewCard.suit?.rawValue)!)
         // Information
         rankLabel.text = drewCard.rank
         nameLabel.text = drewCard.actionName
         descriptionLabel.text = drewCard.actionDescription
+        
         var cardView: CardView = CardView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), card: drewCard)
+        
         view.addSubview(cardView)
+        InformationView.bringSubview(toFront: view)
         deck.remove(at: randCard)
         
     }
