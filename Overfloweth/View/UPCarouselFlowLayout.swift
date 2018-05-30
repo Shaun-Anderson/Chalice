@@ -44,6 +44,15 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
+    override open func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attribute = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath as IndexPath)
+        
+        //attribute?.transform = (attribute?.transform.translatedBy(x: 0, y: 0))!
+        attribute?.alpha = 0.0
+        return attribute
+        
+    }
+    
     fileprivate func setupCollectionView() {
         guard let collectionView = self.collectionView else { return }
         if collectionView.decelerationRate != UIScrollViewDecelerationRateFast {
