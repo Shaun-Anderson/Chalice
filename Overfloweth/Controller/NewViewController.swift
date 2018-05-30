@@ -1,37 +1,76 @@
 import UIKit
 
-class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CardCellDelegate {
+class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CardCellDelegate, UIGestureRecognizerDelegate {
 
     
     var deck = [Card]()
+    var informationView: InformationView?
+    var cardSelected: Bool?
+    var currentCard: CardCell?
 
     // MARK: Card Cell Delegate Methods
     
     func RevealCard(view: UIView, card: CardCell) {
-        UIView.transition(with: view, duration: 1, options: .transitionFlipFromRight,
+        cardSelected = true;
+        //card.removeFromSuperview()
+        //self.view.addSubview(card)
+        print((self.collectionView?.contentOffset.y))
+        //card.center.y = (self.view?.center.y)!
+        print(card.frame)
+        currentCard = card
+
+        UIView.transition(with: card, duration: 1, options: [.transitionFlipFromLeft],
         animations: {
-        view.frame.size.width = self.view.frame.width
-        view.frame.size.height = self.view.frame.height - UIApplication.shared.statusBarFrame.height
-        view.center = card.originalCenter
+        card.frame.size.width = self.view.frame.width - 5
+        card.frame.size.height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - 5
+        card.center.y = card.originalCenter.y
+        card.center.x = card.originalCenter.x
+        //card.frame = (self.view?.frame)!
+        self.view.layoutIfNeeded()
+
         },
         completion: { _ in
-            // TODO: Display information.
-            print("BOOOO")
-            let informationView = InformationView(frame: CGRect(x: 0, y: card.frame.height,width: self.view.frame.width, height: 0), card: card.card!)
-            card.addSubview(informationView)
-            UIView.transition(with: informationView, duration: 1, options: [],
-                              animations: {
-                                informationView.frame.size.height = self.view.frame.height / 2
-                                informationView.center.y = card.frame.height - informationView.frame.height/2
-            },
-                              completion: { _ in
-                                informationView.AnimateInUI()
+            // TODO: CHANGE INFO FRAME
+            self.informationView = InformationView(frame: CGRect(x: 0, y: self.view.frame.height,width: self.view.frame.width, height: 0), card: card.card!)
+            self.view.addSubview(self.informationView!)
+            UIView.animate(withDuration: 1, delay: 0.5, options: [], animations: {
+                self.informationView?.frame.size.height = self.view.frame.height / 2
+                self.informationView?.center.y = self.view.frame.height - (self.informationView?.frame.height)!/2
+                }, completion: { _ in
+                    self.informationView?.AnimateInUI()
+                    card.revealed = true
             })
         })
     }
     
     func DismissCard(card: CardCell) {
+        print("DIE")
+        self.cardSelected = false
+        UIView.transition(with: self.informationView!, duration: 1, options: [],
+                          animations: {
+                            self.informationView?.frame.size.height = 0
+                            self.informationView?.center.y = self.view.frame.height - (self.informationView?.frame.height)!/2
+        },
+                          completion: { _ in
+                            self.informationView?.removeFromSuperview()
+        })
         
+        if let indexPath = self.collectionView?.indexPath(for: card)
+        {
+            print("DELETE \(indexPath.row)" + (card.card?.rank)!)
+            self.collectionView?.performBatchUpdates({ () -> Void in
+                let indexPaths = [NSIndexPath]()
+                self.deck.remove(at: indexPath.row)
+                self.collectionView?.deleteItems(at: [indexPath])
+                self.collectionView?.reloadData()
+                print("Cards Remaining: \(self.deck.count)")
+            }, completion: nil )
+    
+        UIView.animate(withDuration: 1, delay: 2, options: [], animations: {
+            self.currentCard?.removeFromSuperview()
+            self.cardSelected = false;
+            }, completion: nil)
+        }
     }
     
     
@@ -52,6 +91,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         super.viewDidLoad()
         
         deck = loadJson(filename: "Cards") as! [Card]
+        deck = deck.shuffled()
         self.addCollectionView()
         self.setupLayout()
         
@@ -97,6 +137,10 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
 //        self.collectionView?.heightAnchor.constraint(equalToConstant: pointEstimator.relativeHeight(multiplier: 1)).isActive = true
         
         self.currentPage = 0
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
     
     
@@ -145,8 +189,9 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CardCell
-        
+        cell.revealed = false
         cell.card = deck[indexPath.row]
+        cell.indexPath = indexPath
         cell.delegate = self
         return cell
     }
@@ -162,96 +207,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
 }
 
-protocol CardCellDelegate {
-    func RevealCard(view: UIView, card: CardCell)
-    func DismissCard(card: CardCell)
-}
-class CardCell: UICollectionViewCell {
-    
-    var card: Card?
-    var delegate: CardCellDelegate?
-    var revealed: Bool
-    var originalCenter: CGPoint!
 
-    let customView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 12
-        return view
-    }()
-    
-    override init(frame: CGRect) {
-        self.revealed = false
-        super.init(frame: frame)
-        self.addSubview(self.customView)
-        self.customView.backgroundColor = UIColor.darkGray
-
-        self.customView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.customView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        self.customView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        self.customView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
-        
-        let swipeGesture = UIPanGestureRecognizer(target: self, action:#selector(swiped(_:)))
-        self.addGestureRecognizer(swipeGesture)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func Reveal () {
-        self.customView.backgroundColor = UIColor.white
-
-        // Create UI elements
-        let topText = UILabel(frame: CGRect(x: 25, y: 25, width: 50, height: 50))
-        let topSuit = UIImageView(frame: CGRect(x: 37.5, y: 75, width: 25, height: 25))
-        let bottomText = UILabel(frame: CGRect(x: frame.width - 75, y: frame.height - 75, width: 50, height: 50))
-        let bottomSuit = UIImageView(frame: CGRect(x: frame.width - 63.5, y: frame.height - 100, width: 25, height: 25))
-        
-        // Set UI specifcs
-        topText.text = card?.rank
-        topText.textAlignment = NSTextAlignment.center
-        topSuit.image = UIImage(named: (card?.suit?.rawValue)!)
-        bottomText.text = card?.rank
-        bottomText.textAlignment = NSTextAlignment.center
-        bottomSuit.image = UIImage(named: (card?.suit?.rawValue)!)
-        bottomText.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        bottomSuit.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        
-        self.addSubview(topText)
-        self.addSubview(topSuit)
-        self.addSubview(bottomText)
-        self.addSubview(bottomSuit)
-        
-    }
-    
-    // Take the values of the currcent swipe
-    @objc func swiped(_ gestureRecognizer: UIPanGestureRecognizer) {
-        
-        let xDistance:CGFloat = gestureRecognizer.translation(in: self).x
-        let yDistance:CGFloat = gestureRecognizer.translation(in: self).y
-        
-        switch(gestureRecognizer.state) {
-        case UIGestureRecognizerState.ended:
-            // TODO: remove uneeded variables
-            let hasMovedToFarLeft = xDistance < -75
-            if (hasMovedToFarLeft) {
-                originalCenter = self.center
-                self.revealed = true
-                delegate!.RevealCard(view: self, card: self)
-                Reveal()
-            }
-            
-            let swipeDown = yDistance < -75
-            if(swipeDown)
-            {
-                delegate!.DismissCard(card: self)
-            }
-        default:
-            break
-        }
-    }
-} // End of CardCell
 
 
 class RelativeLayoutUtilityClass {
