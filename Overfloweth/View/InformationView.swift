@@ -17,7 +17,7 @@ class InformationView: UIView {
     
     init(frame: CGRect, card: Card) {
         helpLabel = UILabel(frame: CGRect.zero)
-        actionNameLabel = UILabel(frame: CGRect(x: frame.width - 175, y: 25, width: 150, height: 25))
+        actionNameLabel = UILabel(frame: CGRect(x: frame.width - 325, y: 25, width: 300, height: 25))
         actionDescLabel = UILabel(frame: CGRect(x: 25, y: 150, width: frame.width - 50, height: 100))
         rankLabel = UILabel(frame: CGRect(x: 25, y: 25, width: 25, height: 25))
         // TODO: get proper image size (18 ins story board)
@@ -33,8 +33,9 @@ class InformationView: UIView {
             fatalError("Could not find font")
         }
         
-        
         super.init(frame: frame)
+        isUserInteractionEnabled = false
+
         self.helpLabel.text = "Swipe down to continue"
         self.helpLabel.textColor = UIColor.white
         self.helpLabel.textAlignment = NSTextAlignment.center
