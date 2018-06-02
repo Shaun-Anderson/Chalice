@@ -14,6 +14,9 @@ protocol CardCellDelegate {
 }
 class CardCell: UICollectionViewCell {
     
+    var backView: UIView
+    var frontView: UIView
+    
     var card: Card?
     var delegate: CardCellDelegate?
     var revealed: Bool
@@ -27,31 +30,41 @@ class CardCell: UICollectionViewCell {
     
     var panGesture: UIPanGestureRecognizer
     
-    var customView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 12
-        return view
-    }()
-    
     override init(frame: CGRect) {
         self.revealed = false
-        
+        // Create the sides of the cards.
+        backView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        frontView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        frontView.isHidden = true;
         // Create UI elements
         topText = UILabel(frame: CGRect(x: 25, y: 25, width: 50, height: 50))
         topSuit = UIImageView(frame: CGRect(x: 37.5, y: 75, width: 25, height: 25))
         bottomText = UILabel(frame: CGRect(x: frame.width - 75, y: frame.height - 75, width: 50, height: 50))
         bottomSuit = UIImageView(frame: CGRect(x: frame.width - 63.5, y: frame.height - 100, width: 25, height: 25))
+        
+        frontView.addSubview(topText)
+        frontView.addSubview(topSuit)
+        frontView.addSubview(bottomText)
+        frontView.addSubview(bottomSuit)
+        let backCardImage = UIImageView(frame: CGRect(x: 0, y: 0, width: backView.frame.width, height: backView.frame.height))
+        backCardImage.image = UIImage(named: "BackOfCard")
+        backCardImage.layer.masksToBounds = true
+        backCardImage.layer.cornerRadius = 12
+        backView.addSubview(backCardImage)
+
+
         panGesture = UIPanGestureRecognizer()
         super.init(frame: frame)
+        self.addSubview(backView)
+        self.addSubview(frontView)
+        
+        
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(SwipeDown(_:)))
-
         self.addGestureRecognizer(panGesture)
         self.panGesture.isEnabled = false
         //self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 12
         self.backgroundColor = UIColor.darkGray
-
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(SwipeLeft(_:)))
         swipeLeft.direction = .left
@@ -60,6 +73,7 @@ class CardCell: UICollectionViewCell {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(SwipeRight(_:)))
         swipeRight.direction = .right
         self.addGestureRecognizer(swipeRight)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,7 +81,9 @@ class CardCell: UICollectionViewCell {
     }
     
     func Reveal () {
-        self.customView.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.white
+        self.frontView.isHidden = false
+        self.backView.isHidden = true
         self.panGesture.isEnabled = true
 
         topText.frame = CGRect(x: 25, y: 25, width: 50, height: 50)
@@ -84,15 +100,12 @@ class CardCell: UICollectionViewCell {
         bottomSuit.image = UIImage(named: (card?.suit?.rawValue)!)
         bottomText.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         bottomSuit.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        
-        self.addSubview(topText)
-        self.addSubview(topSuit)
-        self.addSubview(bottomText)
-        self.addSubview(bottomSuit)
     }
     
     override func prepareForReuse() {
-        self.customView.backgroundColor = UIColor.darkGray
+        self.backView.isHidden = false
+        self.backgroundColor = UIColor.darkGray
+        self.frontView.isHidden = true
         revealed = false
         topText.text = ""
         topSuit.image = nil
@@ -124,4 +137,4 @@ class CardCell: UICollectionViewCell {
             delegate!.DismissCard(card: self)
         }
     }
-} // End of CardCell
+}
