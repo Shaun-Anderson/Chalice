@@ -2,83 +2,13 @@ import UIKit
 
 class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CardCellDelegate, UIGestureRecognizerDelegate {
 
+    // MARK: - Variables
     
     var deck = [Card]()
     var informationView: InformationView?
     var cardSelected: Bool?
     var currentCard: CardCell?
-
-    // MARK: Card Cell Delegate Methods
-    
-    func RevealCard(view: UIView, card: CardCell) {
-        cardSelected = true;
-        //card.removeFromSuperview()
-        //self.view.addSubview(card)
-        print((self.collectionView?.contentOffset.y))
-        //card.center.y = (self.view?.center.y)!
-        print(card.frame)
-        currentCard = card
-
-        UIView.transition(with: card, duration: 1, options: [.transitionFlipFromLeft],
-        animations: {
-        card.frame.size.width = self.view.frame.width - 5
-        card.frame.size.height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - 5
-        card.center.y = card.originalCenter.y
-        card.center.x = card.originalCenter.x
-        //card.frame = (self.view?.frame)!
-        self.view.layoutIfNeeded()
-
-        },
-        completion: { _ in
-            // TODO: CHANGE INFO FRAME
-            self.informationView = InformationView(frame: CGRect(x: 0, y: self.view.frame.height,width: self.view.frame.width, height: 0), card: card.card!)
-            self.view.addSubview(self.informationView!)
-            UIView.animate(withDuration: 1, delay: 0.5, options: [], animations: {
-                self.informationView?.frame.size.height = self.view.frame.height / 2
-                self.informationView?.center.y = self.view.frame.height - (self.informationView?.frame.height)!/2
-                }, completion: { _ in
-                    self.informationView?.AnimateInUI()
-                    card.revealed = true
-            })
-        })
-    }
-    
-    func DismissCard(card: CardCell) {
-        print("DIE")
-        self.cardSelected = false
-        UIView.transition(with: self.informationView!, duration: 1, options: [],
-                          animations: {
-                            self.informationView?.frame.size.height = 0
-                            self.informationView?.center.y = self.view.frame.height - (self.informationView?.frame.height)!/2
-        },
-                          completion: { _ in
-                            self.informationView?.removeFromSuperview()
-        })
-        
-        if let indexPath = self.collectionView?.indexPath(for: card)
-        {
-            print("DELETE \(indexPath.row)" + (card.card?.rank)!)
-            self.collectionView?.performBatchUpdates({ () -> Void in
-                let indexPaths = [NSIndexPath]()
-                self.deck.remove(at: indexPath.row)
-                self.collectionView?.deleteItems(at: [indexPath])
-                self.collectionView?.reloadData()
-                print("Cards Remaining: \(self.deck.count)")
-            }, completion: nil )
-    
-        UIView.animate(withDuration: 1, delay: 2, options: [], animations: {
-            self.currentCard?.removeFromSuperview()
-            self.cardSelected = false;
-            }, completion: nil)
-        }
-    }
-    
-    
-    
-    // CollectionView variable:
     var collectionView : UICollectionView?
-    
-    // Variables asociated to collection view:
     fileprivate var currentPage: Int = 0
     fileprivate var pageSize: CGSize {
         let layout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
@@ -87,6 +17,8 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         return pageSize
     }
     
+    // MARK: - UIViewController Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,6 +26,41 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         deck = deck.shuffled()
         self.addCollectionView()
         self.setupLayout()
+        
+    }
+    
+    // MARK: - Other functions
+    
+    func addCollectionView(){
+        
+        // This is just an utility custom class to calculate screen points
+        // to the screen based in a reference view. You can ignore this and write the points manually where is required.
+        let pointEstimator = RelativeLayoutUtility(referenceFrameSize: self.view.frame.size)
+        
+        let layout = UPCarouselFlowLayout()
+        // This is used for setting the cell size (size of each view in this case)
+        // Here I'm writting 400 points of height and the 73.33% of the height view frame in points.
+        layout.itemSize = CGSize(width: pointEstimator.relativeWidth(multiplier: 0.73333), height: 500)
+        // Setting the scroll direction
+        layout.scrollDirection = .vertical
+        
+        // Collection view initialization, the collectionView must be
+        // initialized with a layout object.
+        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: view.frame.width, height: view.frame.height - UIApplication.shared.statusBarFrame.height), collectionViewLayout: layout)
+        // This line if for able programmatic constrains.
+        self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
+        // CollectionView delegates and dataSource:
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
+        // Registering the class for the collection view cells
+        self.collectionView?.register(CardCell.self, forCellWithReuseIdentifier: "cellId")
+        
+        // Spacing between cells:
+        let spacingLayout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
+        spacingLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 20)
+        
+        self.collectionView?.backgroundColor = UIColor.gray
+        self.view.addSubview(self.collectionView!)
         
     }
     
@@ -125,57 +92,17 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func setupLayout(){
-        
-
-        // This is just an utility custom class to calculate screen points
-        // to the screen based in a reference view. You can ignore this and write the points manually where is required.
-        let pointEstimator = RelativeLayoutUtilityClass(referenceFrameSize: self.view.frame.size)
-        
-//        self.collectionView?.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        self.collectionView?.topAnchor.constraint(equalTo: self.view.topAnchor, constant: pointEstimator.relativeHeight(multiplier: 0)).isActive = true
-//        self.collectionView?.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-//        self.collectionView?.heightAnchor.constraint(equalToConstant: pointEstimator.relativeHeight(multiplier: 1)).isActive = true
-        
         self.currentPage = 0
     }
+    
+    // MARK: - GestureRecognizerDelegate
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
     
     
-    func addCollectionView(){
-        
-        // This is just an utility custom class to calculate screen points
-        // to the screen based in a reference view. You can ignore this and write the points manually where is required.
-        let pointEstimator = RelativeLayoutUtilityClass(referenceFrameSize: self.view.frame.size)
-        
-        let layout = UPCarouselFlowLayout()
-        // This is used for setting the cell size (size of each view in this case)
-        // Here I'm writting 400 points of height and the 73.33% of the height view frame in points.
-        layout.itemSize = CGSize(width: pointEstimator.relativeWidth(multiplier: 0.73333), height: 500)
-        // Setting the scroll direction
-        layout.scrollDirection = .vertical
 
-        // Collection view initialization, the collectionView must be
-        // initialized with a layout object.
-        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: view.frame.width, height: view.frame.height - UIApplication.shared.statusBarFrame.height), collectionViewLayout: layout)
-        // This line if for able programmatic constrains.
-        self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
-        // CollectionView delegates and dataSource:
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
-        // Registering the class for the collection view cells
-        self.collectionView?.register(CardCell.self, forCellWithReuseIdentifier: "cellId")
-        
-        // Spacing between cells:
-        let spacingLayout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
-        spacingLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 20)
-        
-        self.collectionView?.backgroundColor = UIColor.gray
-        self.view.addSubview(self.collectionView!)
-        
-    }
     
     // MARK: - Card Collection Delegate & DataSource
     
@@ -205,31 +132,69 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         currentPage = Int(floor((offset - pageSide / 2) / pageSide) + 1)
     }
     
-}
-
-
-
-
-class RelativeLayoutUtilityClass {
+    // MARK: - CardCellDelegate
     
-    var heightFrame: CGFloat?
-    var widthFrame: CGFloat?
-    
-    init(referenceFrameSize: CGSize){
-        heightFrame = referenceFrameSize.height
-        widthFrame = referenceFrameSize.width
-    }
-    
-    func relativeHeight(multiplier: CGFloat) -> CGFloat{
+    func RevealCard(view: UIView, card: CardCell) {
+        cardSelected = true;
+        //card.removeFromSuperview()
+        //self.view.addSubview(card)
+        print((self.collectionView?.contentOffset.y))
+        //card.center.y = (self.view?.center.y)!
+        print(card.frame)
+        currentCard = card
         
-        return multiplier * self.heightFrame!
+        UIView.transition(with: card, duration: 1, options: [.transitionFlipFromLeft],
+                          animations: {
+                            card.frame.size.width = self.view.frame.width - 5
+                            card.frame.size.height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - 5
+                            card.center.y = card.originalCenter.y
+                            card.center.x = card.originalCenter.x
+                            //card.frame = (self.view?.frame)!
+                            self.view.layoutIfNeeded()
+                            
+        },
+                          completion: { _ in
+                            // TODO: CHANGE INFO FRAME
+                            self.informationView = InformationView(frame: CGRect(x: 0, y: self.view.frame.height,width: self.view.frame.width, height: 0), card: card.card!)
+                            self.view.addSubview(self.informationView!)
+                            UIView.animate(withDuration: 1, delay: 0.5, options: [], animations: {
+                                self.informationView?.frame.size.height = self.view.frame.height / 2
+                                self.informationView?.center.y = self.view.frame.height - (self.informationView?.frame.height)!/2
+                            }, completion: { _ in
+                                self.informationView?.AnimateInUI()
+                                card.revealed = true
+                            })
+        })
     }
     
-    func relativeWidth(multiplier: CGFloat) -> CGFloat{
-        return multiplier * self.widthFrame!
+    func DismissCard(card: CardCell) {
+        print("DIE")
+        self.cardSelected = false
+        UIView.transition(with: self.informationView!, duration: 1, options: [],
+                          animations: {
+                            self.informationView?.frame.size.height = 0
+                            self.informationView?.center.y = self.view.frame.height - (self.informationView?.frame.height)!/2
+        },
+                          completion: { _ in
+                            self.informationView?.removeFromSuperview()
+        })
         
+        if let indexPath = self.collectionView?.indexPath(for: card)
+        {
+            print("DELETE \(indexPath.row)" + (card.card?.rank)!)
+            self.collectionView?.performBatchUpdates({ () -> Void in
+                let indexPaths = [NSIndexPath]()
+                self.deck.remove(at: indexPath.row)
+                self.collectionView?.deleteItems(at: [indexPath])
+                self.collectionView?.reloadData()
+                print("Cards Remaining: \(self.deck.count)")
+            }, completion: nil )
+            
+            UIView.animate(withDuration: 1, delay: 2, options: [], animations: {
+                self.currentCard?.removeFromSuperview()
+                self.cardSelected = false;
+            }, completion: nil)
+        }
     }
-    
-    
     
 }
