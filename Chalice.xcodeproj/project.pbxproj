@@ -31,7 +31,7 @@
 		286C7E7720BD4FA300EF064A /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Bold.ttf"; path = "../../../../Documents/Fonts/comfortaa/Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		286C7E7820BD4FA300EF064A /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Light.ttf"; path = "../../../../Documents/Fonts/comfortaa/Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		286C7E7920BD4FA400EF064A /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Regular.ttf"; path = "../../../../Documents/Fonts/comfortaa/Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
-		28B0D84020BBEAE4003BAE81 /* Overfloweth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Overfloweth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28B0D84020BBEAE4003BAE81 /* Chalice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chalice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28B0D84820BBEAE4003BAE81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		28B0D84D20BBEAE4003BAE81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		28B0D83720BBEAE4003BAE81 = {
 			isa = PBXGroup;
 			children = (
-				28B0D84220BBEAE4003BAE81 /* Overfloweth */,
+				28B0D84220BBEAE4003BAE81 /* Chalice */,
 				28B0D84120BBEAE4003BAE81 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,12 +75,12 @@
 		28B0D84120BBEAE4003BAE81 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				28B0D84020BBEAE4003BAE81 /* Overfloweth.app */,
+				28B0D84020BBEAE4003BAE81 /* Chalice.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		28B0D84220BBEAE4003BAE81 /* Overfloweth */ = {
+		28B0D84220BBEAE4003BAE81 /* Chalice */ = {
 			isa = PBXGroup;
 			children = (
 				28BB5B8B20C2A3E900404C77 /* SupportFiles */,
@@ -88,14 +88,13 @@
 				28B0D86220BC3927003BAE81 /* Controller */,
 				28B0D86120BC3921003BAE81 /* View */,
 				28B0D85B20BBFFDF003BAE81 /* Model */,
-				28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */,
 				28B0D84720BBEAE4003BAE81 /* Main.storyboard */,
 				28B0D85F20BC0608003BAE81 /* Cards.json */,
 				28B0D84D20BBEAE4003BAE81 /* Assets.xcassets */,
 				28B0D84F20BBEAE4003BAE81 /* LaunchScreen.storyboard */,
 				28B0D85220BBEAE4003BAE81 /* Info.plist */,
 			);
-			path = Overfloweth;
+			path = Chalice;
 			sourceTree = "<group>";
 		};
 		28B0D85B20BBFFDF003BAE81 /* Model */ = {
@@ -128,6 +127,7 @@
 		28BB5B8B20C2A3E900404C77 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */,
 				286C7E7420BD461300EF064A /* Extensions.swift */,
 				28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */,
 			);
@@ -137,9 +137,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		28B0D83F20BBEAE4003BAE81 /* Overfloweth */ = {
+		28B0D83F20BBEAE4003BAE81 /* Chalice */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28B0D85520BBEAE4003BAE81 /* Build configuration list for PBXNativeTarget "Overfloweth" */;
+			buildConfigurationList = 28B0D85520BBEAE4003BAE81 /* Build configuration list for PBXNativeTarget "Chalice" */;
 			buildPhases = (
 				28B0D83C20BBEAE4003BAE81 /* Sources */,
 				28B0D83D20BBEAE4003BAE81 /* Frameworks */,
@@ -149,9 +149,9 @@
 			);
 			dependencies = (
 			);
-			name = Overfloweth;
+			name = Chalice;
 			productName = Overfloweth;
-			productReference = 28B0D84020BBEAE4003BAE81 /* Overfloweth.app */;
+			productReference = 28B0D84020BBEAE4003BAE81 /* Chalice.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -170,7 +170,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 28B0D83B20BBEAE4003BAE81 /* Build configuration list for PBXProject "Overfloweth" */;
+			buildConfigurationList = 28B0D83B20BBEAE4003BAE81 /* Build configuration list for PBXProject "Chalice" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -183,7 +183,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				28B0D83F20BBEAE4003BAE81 /* Overfloweth */,
+				28B0D83F20BBEAE4003BAE81 /* Chalice */,
 			);
 		};
 /* End PBXProject section */
@@ -353,9 +353,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Overfloweth/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Chalice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ANDO.Overfloweth;
+				PRODUCT_BUNDLE_IDENTIFIER = ANDO.Chalice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -367,9 +367,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Overfloweth/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Chalice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ANDO.Overfloweth;
+				PRODUCT_BUNDLE_IDENTIFIER = ANDO.Chalice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -379,7 +379,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		28B0D83B20BBEAE4003BAE81 /* Build configuration list for PBXProject "Overfloweth" */ = {
+		28B0D83B20BBEAE4003BAE81 /* Build configuration list for PBXProject "Chalice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				28B0D85320BBEAE4003BAE81 /* Debug */,
@@ -388,7 +388,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		28B0D85520BBEAE4003BAE81 /* Build configuration list for PBXNativeTarget "Overfloweth" */ = {
+		28B0D85520BBEAE4003BAE81 /* Build configuration list for PBXNativeTarget "Chalice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				28B0D85620BBEAE4003BAE81 /* Debug */,
