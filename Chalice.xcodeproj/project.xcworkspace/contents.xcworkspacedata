@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Overfloweth.xcodeproj">
+      location = "self:/Users/shaun/XcodeProjects/Overfloweth/Chalice.xcodeproj">
    </FileRef>
 </Workspace>
