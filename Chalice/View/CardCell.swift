@@ -30,6 +30,8 @@ class CardCell: UICollectionViewCell {
     
     var panGesture: UIPanGestureRecognizer
     
+    // MARK: - Initialization
+    
     override init(frame: CGRect) {
         self.revealed = false
         // Create the sides of the cards.
@@ -51,14 +53,20 @@ class CardCell: UICollectionViewCell {
         backCardImage.layer.masksToBounds = true
         backCardImage.layer.cornerRadius = 12
         backView.addSubview(backCardImage)
-
-
         panGesture = UIPanGestureRecognizer()
+        
+        guard let boldFont = UIFont(name: "Helvetica-Light", size: 32) else {
+            fatalError("Could not find font")
+        }
+        
         super.init(frame: frame)
+        
+        self.topText.font = boldFont
+        self.bottomText.font = boldFont
+
         self.addSubview(backView)
         self.addSubview(frontView)
-        
-        
+                
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(SwipeDown(_:)))
         self.addGestureRecognizer(panGesture)
         self.panGesture.isEnabled = false
@@ -73,19 +81,35 @@ class CardCell: UICollectionViewCell {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(SwipeRight(_:)))
         swipeRight.direction = .right
         self.addGestureRecognizer(swipeRight)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UICollectionViewCell
+    
+    override func prepareForReuse() {
+        self.backView.isHidden = false
+        self.backgroundColor = UIColor.darkGray
+        self.frontView.isHidden = true
+        revealed = false
+        topText.text = ""
+        topSuit.image = nil
+        bottomText.text = ""
+        bottomSuit.image = nil
+        //self.gestureRecognizers?.remove(at: 2)
+        self.panGesture.isEnabled = false
+    }
+    
+    // MARK: - Other functions
+    
     func Reveal () {
         self.backgroundColor = UIColor.white
         self.frontView.isHidden = false
         self.backView.isHidden = true
         self.panGesture.isEnabled = true
-
+        
         topText.frame = CGRect(x: 25, y: 25, width: 50, height: 50)
         topSuit.frame = CGRect(x: 37.5, y: 75, width: 25, height: 25)
         bottomText.frame = CGRect(x: frame.width - 75, y: frame.height - 75, width: 50, height: 50)
@@ -100,21 +124,6 @@ class CardCell: UICollectionViewCell {
         bottomSuit.image = UIImage(named: (card?.suit?.rawValue)!)
         bottomText.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         bottomSuit.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-    }
-    
-    override func prepareForReuse() {
-        self.backView.isHidden = false
-        self.backgroundColor = UIColor.darkGray
-        self.frontView.isHidden = true
-        revealed = false
-        topText.text = ""
-        topSuit.image = nil
-        bottomText.text = ""
-        bottomSuit.image = nil
-        //self.gestureRecognizers?.remove(at: 2)
-        self.panGesture.isEnabled = false
-
-        
     }
     
     // Take the values of the currcent swipe

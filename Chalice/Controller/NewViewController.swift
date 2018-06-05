@@ -38,9 +38,12 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let pointEstimator = RelativeLayoutUtility(referenceFrameSize: self.view.frame.size)
         
         let layout = UPCarouselFlowLayout()
+        layout.minimumLineSpacing = -44
         // This is used for setting the cell size (size of each view in this case)
         // Here I'm writting 400 points of height and the 73.33% of the height view frame in points.
-        layout.itemSize = CGSize(width: pointEstimator.relativeWidth(multiplier: 0.73333), height: 500)
+        //layout.itemSize = CGSize(width: pointEstimator.relativeWidth(multiplier: 0.73333), height: 500)
+        layout.itemSize = CGSize(width:300, height: 500)
+
         // Setting the scroll direction
         layout.scrollDirection = .vertical
         
@@ -57,7 +60,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         // Spacing between cells:
         let spacingLayout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
-        spacingLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 20)
+        spacingLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 100)
         
         self.collectionView?.backgroundColor = UIColor.gray
         self.view.addSubview(self.collectionView!)
@@ -100,9 +103,6 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
-    
-    
-
     
     // MARK: - Card Collection Delegate & DataSource
     
