@@ -27,8 +27,8 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
     
     @IBInspectable open var sideItemScale: CGFloat = 0.6
     @IBInspectable open var sideItemAlpha: CGFloat = 0.6
-    open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: -100)
-    
+    //open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: -100)
+    open var spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: -100)
     fileprivate var state = LayoutState(size: CGSize.zero, direction: .horizontal)
     
     
@@ -68,7 +68,7 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         
         let yInset = (collectionSize.height - self.itemSize.height) / 2
         let xInset = (collectionSize.width - self.itemSize.width) / 2
-        self.sectionInset = UIEdgeInsetsMake(yInset, xInset, yInset, xInset)
+        self.sectionInset = UIEdgeInsetsMake(yInset, xInset + 50, yInset, xInset)
         
         let side = isHorizontal ? self.itemSize.width : self.itemSize.height
         let scaledItemOffset =  (side - side*self.sideItemScale) / 2
@@ -107,8 +107,10 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         
         let alpha = ratio * (1 - self.sideItemAlpha) + self.sideItemAlpha
         let scale = ratio * (1 - self.sideItemScale) + self.sideItemScale
+        let xOffset = ratio * (1 - 80) + 80
         attributes.alpha = alpha
-        attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
+        attributes.transform3D = CATransform3DConcat(CATransform3DScale(CATransform3DIdentity, scale, scale, 1), CATransform3DTranslate(CATransform3DIdentity, xOffset, 0, 0))
+        //attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
         attributes.zIndex = Int(alpha * 10)
         
         return attributes
