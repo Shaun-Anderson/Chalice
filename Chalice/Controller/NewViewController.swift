@@ -6,6 +6,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     var deck = [Card]()
     var informationView: InformationView?
+    var progressTracker: ProgressView?
     var cardSelected: Bool?
     var currentCard: CardCell?
     var collectionView : UICollectionView?
@@ -24,15 +25,28 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         deck = loadJson(filename: "Cards") as! [Card]
         deck = deck.shuffled()
+        
+        // Add King Tracker
+        progressTracker = ProgressView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: 50, height: view.frame.height - UIApplication.shared.statusBarFrame.height))
+        progressTracker?.fullImage = #imageLiteral(resourceName: "FilledKing")
+        progressTracker?.emptyImage = #imageLiteral(resourceName: "EmptyCrown")
+        progressTracker?.contentMode = UIViewContentMode.scaleAspectFit
+
+        progressTracker?.type = .wholeRatings
+        progressTracker?.rating = 4;
+        
+        self.view.addSubview(progressTracker!)
+
         self.addCollectionView()
         self.setupLayout()
-        
+
     }
     
     // MARK: - Other functions
     
     func addCollectionView(){
-        
+        self.view.backgroundColor = UIColor.darkGray
+
         // This is just an utility custom class to calculate screen points
         // to the screen based in a reference view. You can ignore this and write the points manually where is required.
         let pointEstimator = RelativeLayoutUtility(referenceFrameSize: self.view.frame.size)
@@ -62,7 +76,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let spacingLayout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
         spacingLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 100)
         
-        self.collectionView?.backgroundColor = UIColor.gray
+        self.collectionView?.backgroundColor = UIColor.clear
         self.view.addSubview(self.collectionView!)
         
     }
@@ -111,6 +125,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        progressTracker?.cardsRemaining = deck.count
         return deck.count
     }
     
@@ -136,17 +151,22 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     func RevealCard(view: UIView, card: CardCell) {
         cardSelected = true;
-        //card.removeFromSuperview()
-        //self.view.addSubview(card)
+//        card.removeFromSuperview()
+//        self.view.addSubview(card)
         print((self.collectionView?.contentOffset.y))
         //card.center.y = (self.view?.center.y)!
         print(card.frame)
         currentCard = card
         
+        if(card.card?.rank == "K")
+        {
+            progressTracker?.rating -= 1
+        }
+        
         UIView.transition(with: card, duration: 1, options: [.transitionFlipFromLeft],
                           animations: {
-                            card.frame.size.width = self.view.frame.width - 5
-                            card.frame.size.height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - 5
+//                            card.frame.size.width = self.view.frame.width - 5
+//                            card.frame.size.height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - 5
                             card.center.y = card.originalCenter.y
                             card.center.x = card.originalCenter.x
                             //card.frame = (self.view?.frame)!
