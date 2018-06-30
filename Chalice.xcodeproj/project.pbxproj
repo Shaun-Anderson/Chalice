@@ -12,6 +12,7 @@
 		2849A02D20BE8FD80097EB85 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849A02C20BE8FD80097EB85 /* CardCell.swift */; };
 		286C7E7320BD1A0B00EF064A /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C7E7220BD1A0B00EF064A /* InformationView.swift */; };
 		286C7E7520BD461300EF064A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C7E7420BD461300EF064A /* Extensions.swift */; };
+		2880791420E6237500A0FFC1 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880791320E6237500A0FFC1 /* ProgressView.swift */; };
 		28B0D84420BBEAE4003BAE81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */; };
 		28B0D84920BBEAE4003BAE81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B0D84720BBEAE4003BAE81 /* Main.storyboard */; };
 		28B0D84E20BBEAE4003BAE81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28B0D84D20BBEAE4003BAE81 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 		286C7E7720BD4FA300EF064A /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Bold.ttf"; path = "../../../../Documents/Fonts/comfortaa/Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		286C7E7820BD4FA300EF064A /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Light.ttf"; path = "../../../../Documents/Fonts/comfortaa/Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		286C7E7920BD4FA400EF064A /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Regular.ttf"; path = "../../../../Documents/Fonts/comfortaa/Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
+		2880791320E6237500A0FFC1 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		28B0D84020BBEAE4003BAE81 /* Chalice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chalice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28B0D84820BBEAE4003BAE81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */,
 				286C7E7220BD1A0B00EF064A /* InformationView.swift */,
 				2849A02C20BE8FD80097EB85 /* CardCell.swift */,
+				2880791320E6237500A0FFC1 /* ProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				28BB5B8A20C2A2F100404C77 /* RelativeLayoutUtility.swift in Sources */,
 				282EA23020BCFC2E0085514C /* UPCarouselFlowLayout.swift in Sources */,
 				282EA22E20BCFBC60085514C /* NewViewController.swift in Sources */,
+				2880791420E6237500A0FFC1 /* ProgressView.swift in Sources */,
 				28B0D85D20BBFFEC003BAE81 /* Card.swift in Sources */,
 				28BB5B8820C29F5F00404C77 /* MenuViewController.swift in Sources */,
 			);
