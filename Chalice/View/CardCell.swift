@@ -49,7 +49,7 @@ class CardCell: UICollectionViewCell {
         frontView.addSubview(bottomText)
         frontView.addSubview(bottomSuit)
         let backCardImage = UIImageView(frame: CGRect(x: 0, y: 0, width: backView.frame.width, height: backView.frame.height))
-        backCardImage.image = UIImage(named: "BackOfCard")
+        backCardImage.image = #imageLiteral(resourceName: "CardBack")
         backCardImage.layer.masksToBounds = true
         backCardImage.layer.cornerRadius = 12
         backView.addSubview(backCardImage)
@@ -70,7 +70,6 @@ class CardCell: UICollectionViewCell {
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(SwipeDown(_:)))
         self.addGestureRecognizer(panGesture)
         self.panGesture.isEnabled = false
-        //self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 12
         self.backgroundColor = UIColor.darkGray
         
