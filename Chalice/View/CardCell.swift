@@ -90,7 +90,7 @@ class CardCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         self.backView.isHidden = false
-        self.backgroundColor = UIColor.darkGray
+        self.backgroundColor = UIColor.white
         self.frontView.isHidden = true
         revealed = false
         topText.text = ""
@@ -104,7 +104,16 @@ class CardCell: UICollectionViewCell {
     // MARK: - Other functions
     
     func Reveal () {
-        self.backgroundColor = UIColor.white
+        if(card?.rank == "K")
+        {
+            self.backgroundColor = UIColor.yellow
+            self.backgroundColor = UIColor(red: 255/255, green: 204/255, blue: 0/255, alpha: 1)
+
+        }
+        else
+        {
+            self.backgroundColor = UIColor.white
+        }
         self.frontView.isHidden = false
         self.backView.isHidden = true
         self.panGesture.isEnabled = true
@@ -118,6 +127,7 @@ class CardCell: UICollectionViewCell {
         topText.text = card?.rank
         topText.textAlignment = NSTextAlignment.center
         topSuit.image = UIImage(named: (card?.suit?.rawValue)!)
+        topSuit.tintColor = UIColor.darkGray
         bottomText.text = card?.rank
         bottomText.textAlignment = NSTextAlignment.center
         bottomSuit.image = UIImage(named: (card?.suit?.rawValue)!)
