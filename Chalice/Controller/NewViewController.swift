@@ -4,11 +4,11 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
 
     // MARK: - Variables
     
+    var ruleSet: ResponseData?
     var deck = [Card]()
+    // UI
     var informationView: InformationView?
     var progressTracker: ProgressView?
-    var cardSelected: Bool?
-    var currentCard: CardCell?
     var collectionView : UICollectionView?
     fileprivate var currentPage: Int = 0
     fileprivate var pageSize: CGSize {
@@ -18,14 +18,18 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         return pageSize
     }
     
+    var cardSelected: Bool?
+    var currentCard: CardCell?
+    
     // MARK: - UIViewController Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        deck = loadJson(filename: "Cards") as! [Card]
+        deck = generateDeck(ruleset: ruleSet!)!
         deck = deck.shuffled()
-        
+        var statusBarView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: UIApplication.shared.statusBarFrame.height))
+        statusBarView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.1)
         // Add King Tracker
         progressTracker = ProgressView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: 50, height: view.frame.height - UIApplication.shared.statusBarFrame.height))
         progressTracker?.fullImage = #imageLiteral(resourceName: "FilledKing")
@@ -39,13 +43,14 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
 
         self.addCollectionView()
         self.setupLayout()
+        self.view.addSubview(statusBarView)
 
     }
     
     // MARK: - Other functions
     
     func addCollectionView(){
-        self.view.backgroundColor = UIColor.darkGray
+        self.view.backgroundColor = UIColor(red: 14/255, green: 1/255, blue: 26/255, alpha: 1)
 
         // This is just an utility custom class to calculate screen points
         // to the screen based in a reference view. You can ignore this and write the points manually where is required.
@@ -63,7 +68,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         // Collection view initialization, the collectionView must be
         // initialized with a layout object.
-        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: view.frame.width, height: view.frame.height - UIApplication.shared.statusBarFrame.height), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - UIApplication.shared.statusBarFrame.height), collectionViewLayout: layout)
         // This line if for able programmatic constrains.
         self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
         // CollectionView delegates and dataSource:
@@ -81,31 +86,18 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
     }
     
-    func loadJson(filename fileName: String) -> [Card]? {
-        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
-            print("NADS")
-            do {
-                let data = try Data(contentsOf: url)
-                let decoder = JSONDecoder()
-                let jsonData = try decoder.decode(ResponseData.self, from: data)
-                var tempDeck = [Card]()
-                print(jsonData.Cards.count)
-                var index: Int = 0
-                for i in 0...3 {
-                    for j in 0...jsonData.Cards.count-1 {
-                        var newCard: Card = jsonData.Cards[j]
-                        newCard.suit = SuitType.allValues[i]
-                        tempDeck.append(newCard)
-                        print("NEW CARD: \(newCard.rank) : \(newCard.suit)")
-                        index += 1
-                    }
-                }
-                return tempDeck
-            } catch {
-                print("error:\(error)")
+    func generateDeck(ruleset: ResponseData) -> [Card]? {
+        var tempDeck = [Card]()
+        var index: Int = 0
+        for i in 0...3 {
+            for j in 0...ruleset.Cards.count-1 {
+                var newCard: Card = ruleset.Cards[j]
+                newCard.suit = SuitType.allValues[i]
+                tempDeck.append(newCard)
+                index += 1
             }
         }
-        return nil
+        return tempDeck
     }
     
     func setupLayout(){
@@ -150,6 +142,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     // MARK: - CardCellDelegate
     
     func RevealCard(view: UIView, card: CardCell) {
+        collectionView?.isScrollEnabled = false
         cardSelected = true;
 //        card.removeFromSuperview()
 //        self.view.addSubview(card)
@@ -175,11 +168,11 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         },
                           completion: { _ in
                             // TODO: CHANGE INFO FRAME
-                            self.informationView = InformationView(frame: CGRect(x: 0, y: self.view.frame.height,width: self.view.frame.width, height: 0), card: card.card!)
-                            self.view.addSubview(self.informationView!)
-                            UIView.animate(withDuration: 1, delay: 0.5, options: [], animations: {
-                                self.informationView?.frame.size.height = self.view.frame.height / 2
-                                self.informationView?.center.y = self.view.frame.height - (self.informationView?.frame.height)!/2
+                            self.informationView = InformationView(frame: CGRect(x: 0, y: card.frame.height/2,width: card.frame.width, height: 0), card: card.card!)
+                            card.addSubview(self.informationView!)
+                            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                                self.informationView?.frame.size.height = card.frame.height / 2
+                                self.informationView?.center.y = card.frame.height/2
                             }, completion: { _ in
                                 self.informationView?.AnimateInUI()
                                 card.revealed = true
@@ -188,6 +181,8 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func DismissCard(card: CardCell) {
+        collectionView?.isScrollEnabled = true
+
         print("DIE")
         self.cardSelected = false
         UIView.transition(with: self.informationView!, duration: 1, options: [],
