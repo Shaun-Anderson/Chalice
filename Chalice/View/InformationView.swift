@@ -54,28 +54,31 @@ class InformationView: UIView {
         self.actionDescLabel.alpha = 0
         self.actionDescLabel.font = regualarFont
         
-        self.rankLabel.text = card.rank
-        self.rankLabel.textColor = UIColor.white
-        self.rankLabel.textAlignment = NSTextAlignment.right
-        self.rankLabel.font = boldFont
+//        self.rankLabel.text = card.rank
+//        self.rankLabel.textColor = UIColor.white
+//        self.rankLabel.textAlignment = NSTextAlignment.right
+//        self.rankLabel.font = boldFont
         
-        self.suitImageView.image = UIImage(named: (card.suit?.rawValue)!)
+//        self.suitImageView.image = UIImage(named: (card.suit?.rawValue)!)
         
         // TODO: set text and size
         self.backgroundColor = UIColor(white: 0, alpha: 0.75)
         
         self.addSubview(actionNameLabel)
         self.addSubview(actionDescLabel)
-        self.addSubview(rankLabel)
-        self.addSubview(suitImageView)
         self.addSubview(helpLabel)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        actionDescLabel.sizeToFit()
     }
     
     // TODO: add extra animations if needed
     public func AnimateInUI ()
     {
         helpLabel.frame = CGRect(x: 25, y: frame.height - 50, width: frame.height - 10, height: 25)
-        actionDescLabel.frame = CGRect(x: 25, y: 50, width: frame.width - 50, height: frame.height-150)
+        actionDescLabel.frame = CGRect(x: 25, y: 75, width: frame.width - 50, height: frame.height-150)
         UIView.animate(withDuration: 0.5, animations: {
             self.actionDescLabel.alpha = 1
             self.helpLabel.alpha = 1
