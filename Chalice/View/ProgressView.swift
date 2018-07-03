@@ -65,6 +65,8 @@ open class ProgressView: UIView {
         }
     }
     
+    var pauseButton: UIImageView?
+    
     /// Max rating value.
     @IBInspectable open var maxRating: Int = 4 {
         didSet {
@@ -120,6 +122,7 @@ open class ProgressView: UIView {
         initImageViews()
         cardNumberLabel = UILabel(frame: CGRect(x: 0, y: self.frame.height - 65, width: 50, height: 50))
         cardNumberLabel?.textAlignment = NSTextAlignment.center
+        cardNumberLabel?.textColor = UIColor.gray
         addSubview(cardNumberLabel!)
     }
     
@@ -214,7 +217,7 @@ open class ProgressView: UIView {
             return
         }
         
-        let desiredImageWidth = frame.size.width - 15
+        let desiredImageWidth = frame.size.width - 25
         let maxImageWidth = max(minImageSize.width, desiredImageWidth)
         let maxImageHeight = max(minImageSize.height, frame.size.height)
         let imageViewSize = sizeForImage(fullImage!, inSize: CGSize(width: maxImageWidth, height: maxImageHeight))
