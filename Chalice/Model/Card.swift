@@ -8,15 +8,22 @@
 
 import Foundation
 
-struct ResponseData: Decodable {
+struct ResponseData: Codable {
+    var Title: String
     var Cards: [Card]
 }
 
-struct Card: Decodable {
+struct Card: Codable {
     var rank: String
     var actionName: String
     var actionDescription: String
-    var suit: SuitType?
+    var suit: SuitType? = nil
+    
+    private enum CodingKeys: String, CodingKey {
+        case rank
+        case actionName
+        case actionDescription
+    }
 }
 
 enum SuitType: String, Codable {
