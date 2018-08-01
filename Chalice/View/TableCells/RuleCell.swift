@@ -14,8 +14,8 @@ protocol RuleCellDelegate {
 class RuleCell: UITableViewCell, UITextFieldDelegate, UITextViewDelegate {
 
     var index: Int?
-    var titleLabel: UILabel
-    var actionNameInput: UITextField
+    var titleLabel: PaddedUILabel
+    var actionNameInput: PaddedTextField
     var actionDescInput: UITextView
     var backView: UIView
     
@@ -26,48 +26,44 @@ class RuleCell: UITableViewCell, UITextFieldDelegate, UITextViewDelegate {
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        titleLabel = UILabel(frame: CGRect.zero)
-        actionNameInput = UITextField(frame: CGRect.zero)
+        titleLabel = PaddedUILabel(frame: CGRect.zero)
+        actionNameInput = PaddedTextField(frame: CGRect.zero)
         actionDescInput = UITextView(frame: CGRect.zero)
         backView = UIView(frame: CGRect.zero)
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = UIColor.clear
+        backView.backgroundColor = UIColor.red
         
-        backView.layer.cornerRadius = 10
-        backView.backgroundColor = UIColor.darkGray
-        
-        titleLabel.textAlignment = .center
+        //titleLabel.textAlignment = .center
         titleLabel.textColor = UIColor.white
+        titleLabel.backgroundColor = UIColor.gray
         
-        actionNameInput.backgroundColor = UIColor.gray
-        actionNameInput.placeholder = "Action Name"
+        actionNameInput.attributedPlaceholder = NSAttributedString(string: "Action Name",
+                                                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
         actionNameInput.textColor = UIColor.white
         actionNameInput.delegate = self
         
-        actionDescInput.backgroundColor = UIColor.orange
+        actionDescInput.backgroundColor = UIColor.clear
         actionDescInput.font = UIFont(name: "Helvetica", size: 16)
         actionDescInput.delegate = self
         
         addSubview(backView)
-        backView.addSubview(titleLabel)
-        backView.addSubview(actionNameInput)
-        backView.addSubview(actionDescInput)
+        addSubview(titleLabel)
+        addSubview(actionNameInput)
+        addSubview(actionDescInput)
         
     }
     
     override func layoutSubviews() {
-        backView.frame = CGRect(x: 5, y: 5, width: frame.width - 10, height: frame.height - 10)
-        titleLabel.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
-        actionNameInput.frame = CGRect(x: 60, y: 0, width: self.frame.width - 100, height: 30)
-        actionDescInput.frame = CGRect(x: 60, y: 30, width: self.frame.width - 100, height: 60)
-        errorCheck()
+        backView.frame = CGRect(x: 0, y: 0, width: 5, height: frame.height)
+        titleLabel.frame = CGRect(x: 5, y: 0, width: self.frame.width, height: 30)
+        actionNameInput.frame = CGRect(x: 5, y: 30, width: self.frame.width, height: 30)
+        actionDescInput.frame = CGRect(x: 5, y: 60, width: self.frame.width, height: 60)
+        actionNameInput.setBottomBorder(color: UIColor.white, size: 1)
+
+        //errorCheck()
     }
     
     func errorCheck() {
@@ -76,25 +72,30 @@ class RuleCell: UITableViewCell, UITextFieldDelegate, UITextViewDelegate {
         // Empty Checks
         if(actionNameInput.text!.trimmingCharacters(in: .whitespaces).isEmpty)
         {
-            backView.backgroundColor = UIColor.yellow
             nameClean = false
         } else {
-            backView.backgroundColor = UIColor.green
             nameClean = true
         }
         
         if(actionDescInput.text!.trimmingCharacters(in: .whitespaces).isEmpty)
         {
-            backView.backgroundColor = UIColor.yellow
             descClean = false
         } else {
-            backView.backgroundColor = UIColor.green
             descClean = true
+        }
+        
+        if(descClean && nameClean)
+        {
+            backView.backgroundColor = UIColor.green
+        }
+        else
+        {
+            backView.backgroundColor = UIColor.red
         }
     }
     
     override func prepareForReuse() {
-        backView.backgroundColor = UIColor.darkGray
+        backView.backgroundColor = UIColor.red
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -115,3 +116,5 @@ class RuleCell: UITableViewCell, UITextFieldDelegate, UITextViewDelegate {
         errorCheck()
     }
 }
+
+
