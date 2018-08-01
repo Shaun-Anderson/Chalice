@@ -26,33 +26,43 @@ class InformationView: UIView {
         guard let boldFont = UIFont(name: "Helvetica-Bold", size: 18) else {
             fatalError("Could not find font")
         }
-        guard let regualarFont = UIFont(name: "Helvetica", size: UIFont.labelFontSize) else {
-            fatalError("Could not find font")
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
         }
-        guard let lightFont = UIFont(name: "Helvetica-Light", size: UIFont.labelFontSize) else {
+        guard let regularFont = UIFont(name: "QuicksandBook-Regular", size: UIFont.labelFontSize) else {
+            fatalError("Failed to load the CustomFont-Light font.")
+        }
+        guard let lightFont = UIFont(name: "NordicaThin", size: UIFont.labelFontSize) else {
             fatalError("Could not find font")
         }
         
         super.init(frame: frame)
         isUserInteractionEnabled = false
 
-        self.helpLabel.text = "Swipe down to continue"
+        self.helpLabel.text = "---> Swipe to continue."
         self.helpLabel.textColor = UIColor.white
-        self.helpLabel.textAlignment = NSTextAlignment.center
+        self.helpLabel.textAlignment = NSTextAlignment.right
         self.helpLabel.alpha = 0
         self.helpLabel.font = lightFont
+        helpLabel.font = helpLabel.font.withSize(14)
 
-        self.actionNameLabel.text = card.actionName
+
+        self.actionNameLabel.text = card.actionName.uppercased()
         self.actionNameLabel.textColor = UIColor.white
         self.actionNameLabel.textAlignment = NSTextAlignment.right
-        self.actionNameLabel.font = boldFont
+        self.actionNameLabel.font = lightFont
         
         self.actionDescLabel.text = card.actionDescription
         self.actionDescLabel.textColor = UIColor.gray
         self.actionDescLabel.textAlignment = NSTextAlignment.left
-        self.actionDescLabel.numberOfLines = 0
+        self.actionDescLabel.numberOfLines = 5
         self.actionDescLabel.alpha = 0
-        self.actionDescLabel.font = regualarFont
+        
+
+        self.actionDescLabel.font = lightFont
+        actionDescLabel.font = helpLabel.font.withSize(14)
+
         
 //        self.rankLabel.text = card.rank
 //        self.rankLabel.textColor = UIColor.white
@@ -77,7 +87,7 @@ class InformationView: UIView {
     // TODO: add extra animations if needed
     public func AnimateInUI ()
     {
-        helpLabel.frame = CGRect(x: 25, y: frame.height - 50, width: frame.height - 10, height: 25)
+        helpLabel.frame = CGRect(x: 25, y: frame.height - 50, width: frame.height, height: 25)
         actionDescLabel.frame = CGRect(x: 25, y: 75, width: frame.width - 50, height: frame.height-150)
         UIView.animate(withDuration: 0.5, animations: {
             self.actionDescLabel.alpha = 1

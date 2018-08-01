@@ -55,8 +55,12 @@ class CardCell: UICollectionViewCell {
         backView.addSubview(backCardImage)
         panGesture = UIPanGestureRecognizer()
         
-        guard let boldFont = UIFont(name: "Helvetica-Light", size: 32) else {
-            fatalError("Could not find font")
+        guard let boldFont = UIFont(name: "NordicaThin", size: UIFont.labelFontSize) else {
+            fatalError("""
+        Failed to load the "CustomFont-Light" font.
+        Make sure the font file is included in the project and the font name is spelled correctly.
+        """
+            )
         }
         
         super.init(frame: frame)

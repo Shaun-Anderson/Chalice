@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension MutableCollection {
     /// Shuffle the elements of `self` in-place.
@@ -27,3 +28,20 @@ extension Collection {
         return list
     }
 }
+
+extension UITextField
+{
+    func setBottomBorder(color:UIColor, size: CGFloat)
+    {
+        self.borderStyle = UITextBorderStyle.none;
+        let border = CALayer()
+        let width: CGFloat = size
+        border.borderColor = UIColor.white.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width,   width:  self.frame.size.width, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+    
+}
+

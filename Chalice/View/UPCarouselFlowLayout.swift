@@ -105,13 +105,13 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         let distance = min(abs(collectionCenter - normalizedCenter), maxDistance)
         let ratio = (maxDistance - distance)/maxDistance
         
-        let alpha = ratio * (1 - self.sideItemAlpha) + self.sideItemAlpha
-        let scale = ratio * (1 - self.sideItemScale) + self.sideItemScale
-        let xOffset = ratio * (1 - 80) + 80
-        attributes.alpha = alpha
-        attributes.transform3D = CATransform3DConcat(CATransform3DScale(CATransform3DIdentity, scale, scale, 1), CATransform3DTranslate(CATransform3DIdentity, xOffset, 0, 0))
-        //attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
-        attributes.zIndex = Int(alpha * 10)
+//        let alpha = ratio * (1 - self.sideItemAlpha) + self.sideItemAlpha
+//        let scale = ratio * (1 - self.sideItemScale) + self.sideItemScale
+//        let xOffset = ratio * (1 - 80) + 80
+//        attributes.alpha = alpha
+//        attributes.transform3D = CATransform3DConcat(CATransform3DScale(CATransform3DIdentity, scale, scale, 1), CATransform3DTranslate(CATransform3DIdentity, xOffset, 0, 0))
+//        //attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
+//        attributes.zIndex = Int(alpha * 10)
         
         return attributes
     }

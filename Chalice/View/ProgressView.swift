@@ -65,8 +65,6 @@ open class ProgressView: UIView {
         }
     }
     
-    var pauseButton: UIImageView?
-    
     /// Max rating value.
     @IBInspectable open var maxRating: Int = 4 {
         didSet {
@@ -114,16 +112,22 @@ open class ProgressView: UIView {
     /// Float rating view type
     @IBInspectable open var type: FloatRatingViewType = .wholeRatings
     
+    var pauseButton : UIButton?
     // MARK: Initializations
     
     required override public init(frame: CGRect) {
         super.init(frame: frame)
         
         initImageViews()
-        cardNumberLabel = UILabel(frame: CGRect(x: 0, y: self.frame.height - 65, width: 50, height: 50))
+        
+        pauseButton = UIButton(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.width))
+        pauseButton?.setTitle("||", for: .normal)
+        pauseButton?.setTitleColor(UIColor.white, for: .normal)
+        cardNumberLabel = UILabel(frame: CGRect(x: 0, y: self.frame.height - 65, width: 50, height: 75))
         cardNumberLabel?.textAlignment = NSTextAlignment.center
         cardNumberLabel?.textColor = UIColor.gray
         addSubview(cardNumberLabel!)
+        addSubview(pauseButton!)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -143,15 +147,20 @@ open class ProgressView: UIView {
             let emptyImageView = UIImageView()
             emptyImageView.contentMode = imageContentMode
             emptyImageView.image = emptyImage
+            emptyImageView.alpha = 0
             emptyImageViews.append(emptyImageView)
             addSubview(emptyImageView)
             
             let fullImageView = UIImageView()
             fullImageView.contentMode = imageContentMode
             fullImageView.image = fullImage
+            fullImageView.alpha = 0
             fullImageViews.append(fullImageView)
             addSubview(fullImageView)
+            
+
         }
+        
     }
     
     private func removeImageViews() {
@@ -224,7 +233,7 @@ open class ProgressView: UIView {
         let imageXOffset = CGFloat(0)
         
         for i in 0..<maxRating {
-            let imageFrame = CGRect(x: 10, y: i == 0 ? 0 : CGFloat(i)*(imageXOffset+imageViewSize.height), width: imageViewSize.width, height: imageViewSize.height)
+            let imageFrame = CGRect(x: 12.5, y: i == 0 ? frame.height/2 - 100 : (frame.height/2 - 100) + CGFloat(i)*(imageXOffset+imageViewSize.height), width: imageViewSize.width, height: imageViewSize.height)
             
             var imageView = emptyImageViews[i]
             imageView.frame = imageFrame
@@ -232,7 +241,14 @@ open class ProgressView: UIView {
             imageView = fullImageViews[i]
             imageView.frame = imageFrame
         }
-        
+        var delayTime : Double = 0
+        for imageView in fullImageViews {
+            
+            UIView.animate(withDuration: 0.5, delay: delayTime, animations: {
+                imageView.alpha = 1
+            })
+            delayTime += 0.5
+        }
         refresh()
     }
     

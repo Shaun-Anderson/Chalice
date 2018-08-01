@@ -28,7 +28,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         deck = generateDeck(ruleset: ruleSet!)!
         deck = deck.shuffled()
-        var statusBarView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: UIApplication.shared.statusBarFrame.height))
+        let statusBarView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: UIApplication.shared.statusBarFrame.height))
         statusBarView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.1)
         // Add King Tracker
         progressTracker = ProgressView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: 50, height: view.frame.height - UIApplication.shared.statusBarFrame.height))
@@ -45,6 +45,12 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         self.setupLayout()
         self.view.addSubview(statusBarView)
 
+    }
+    
+    override func viewDidLayoutSubviews() {
+        UIView.animate(withDuration: 3, delay: 0, animations: {
+            self.collectionView?.alpha = 1
+        })
     }
     
     // MARK: - Other functions
@@ -156,7 +162,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
             progressTracker?.rating -= 1
         }
         
-        UIView.transition(with: card, duration: 1, options: [.transitionFlipFromLeft],
+        UIView.transition(with: card, duration: 0.5, options: [.transitionFlipFromLeft],
                           animations: {
 //                            card.frame.size.width = self.view.frame.width - 5
 //                            card.frame.size.height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - 5
@@ -170,7 +176,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
                             // TODO: CHANGE INFO FRAME
                             self.informationView = InformationView(frame: CGRect(x: 0, y: card.frame.height/2,width: card.frame.width, height: 0), card: card.card!)
                             card.addSubview(self.informationView!)
-                            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                            UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                                 self.informationView?.frame.size.height = card.frame.height / 2
                                 self.informationView?.center.y = card.frame.height/2
                             }, completion: { _ in
@@ -181,35 +187,33 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func DismissCard(card: CardCell) {
-        collectionView?.isScrollEnabled = true
-
-        print("DIE")
+        self.collectionView?.isScrollEnabled = true
         self.cardSelected = false
-        UIView.transition(with: self.informationView!, duration: 1, options: [],
-                          animations: {
-                            self.informationView?.frame.size.height = 0
-                            self.informationView?.center.y = self.view.frame.height - (self.informationView?.frame.height)!/2
-        },
-                          completion: { _ in
-                            self.informationView?.removeFromSuperview()
-        })
         
-        if let indexPath = self.collectionView?.indexPath(for: card)
-        {
-            print("DELETE \(indexPath.row)" + (card.card?.rank)!)
-            self.collectionView?.performBatchUpdates({ () -> Void in
-                let indexPaths = [NSIndexPath]()
-                self.deck.remove(at: indexPath.row)
-                self.collectionView?.deleteItems(at: [indexPath])
-                self.collectionView?.reloadData()
-                print("Cards Remaining: \(self.deck.count)")
-            }, completion: nil )
-            
-            UIView.animate(withDuration: 1, delay: 2, options: [], animations: {
-                self.currentCard?.removeFromSuperview()
-                self.cardSelected = false;
-            }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [], animations: {
+            card.center.x = 1000
+        }, completion: nil)
+        
+        func delay(_ delay:Double, closure:@escaping ()->()) {
+            let when = DispatchTime.now() + delay
+            DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
         }
+        
+        delay(0.5, closure: {
+            card.alpha = 0
+            self.informationView?.removeFromSuperview()
+            UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+                if let indexPath = self.collectionView?.indexPath(for: card)
+                {
+                    print("DELETE \(indexPath.row)" + (card.card?.rank)!)
+                    self.collectionView?.performBatchUpdates({ () -> Void in
+                        self.deck.remove(at: indexPath.row)
+                        self.collectionView?.deleteItems(at: [indexPath])
+                        print("Cards Remaining: \(self.deck.count)")
+                    }, completion: nil )
+                }
+            }, completion: nil)
+            })
     }
     
 }

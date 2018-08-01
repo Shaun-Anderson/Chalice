@@ -24,9 +24,10 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Comfortaa-Bold.ttf</string>
-		<string>Comfortaa-Light.ttf</string>
-		<string>Comfortaa-Regular.ttf</string>
+		<string>Odin Rounded - Bold</string>
+		<string>NordicaRegular.otf</string>
+		<string>NordicaThin.otf</string>
+		<string>Quicksand_Book.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

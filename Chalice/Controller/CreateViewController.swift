@@ -21,7 +21,7 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    // Mark: TableView Delegate
+    // Mark: TableView Delegate / DataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ruleset!.Cards.count
@@ -41,6 +41,7 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     // Mark: - Variables
     var createButton: UIButton?
+    var cancelButton: UIButton?
     var nameTextView: UITextField?
     var tableView: UITableView?
     var ruleset: ResponseData?
@@ -49,35 +50,42 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         // generate base
         ruleset = loadJson(filename: "Template")
-        
+        self.view.backgroundColor = UIColor(red: 14/255, green: 1/255, blue: 26/255, alpha: 1)
+
         var y = UIApplication.shared.statusBarFrame.height
-        
+        y += 40
         nameTextView = UITextField(frame: CGRect(x: self.view.frame.width/2-100, y: y, width: 200, height: 50))
-        nameTextView?.backgroundColor = UIColor.gray
+        nameTextView?.attributedPlaceholder = NSAttributedString(string: "Deck Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+        nameTextView?.textAlignment = .center
         
-        createButton = UIButton(frame: CGRect(x: 0, y: y, width: 100, height: 50))
-        createButton?.titleLabel?.text = "Create"
+        createButton = UIButton(frame: CGRect(x: self.view.frame.width-75, y: y, width: 50, height: 50))
+        createButton?.setTitle("Create", for: .normal)
         createButton?.backgroundColor = UIColor.green
         createButton?.addTarget(self, action: #selector(self.saveFile), for: .touchUpInside)
 
-        y += 60
+        cancelButton = UIButton(frame: CGRect(x: 25, y: y, width: 50, height: 50))
+        cancelButton?.setTitle("Cancel", for: .normal)
+        cancelButton?.backgroundColor = UIColor.red
+        cancelButton?.addTarget(self, action: #selector(self.cancelButtonPressed), for: .touchUpInside)
         
-        tableView = UITableView(frame: CGRect(origin: CGPoint(x: 0, y: y), size: CGSize(width: self.view.frame.width, height: self.view.frame.height - 60)))
-        tableView?.backgroundColor = UIColor.white
+        y += 100
+        
+        tableView = UITableView(frame: CGRect(origin: CGPoint(x: 0, y: y), size: CGSize(width: self.view.frame.width, height: self.view.frame.height - y)))
         tableView?.register(RuleCell.self, forCellReuseIdentifier: "cell")
         tableView?.separatorStyle = .none
-        tableView?.rowHeight = 100.0
-        
+        tableView?.separatorColor = UIColor(red: 14/255, green: 1/255, blue: 26/255, alpha: 1)
+        tableView?.rowHeight = 120.0
+        tableView?.backgroundColor = UIColor.clear
         tableView?.dataSource = self
         tableView?.delegate = self
         
         self.view.addSubview(tableView!)
         self.view.addSubview(createButton!)
+        self.view.addSubview(cancelButton!)
         self.view.addSubview(nameTextView!)
-        // Create
-        //saveFile()
-        //getUploadedFileSet(filename: "NEW")
-        // Do any additional setup after loading the view.
+        
+        nameTextView?.setBottomBorder(color: UIColor.white, size: 1)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -131,6 +139,10 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // Set Values
         ruleset?.Title = (nameTextView?.text)!
+        if(ruleset?.Title == nil)
+        {
+            // Create rename alert
+        }
         
         let encodedData = try? JSONEncoder().encode(ruleset)
         //let file: FileHandle? = FileHandle(forWritingAtPath: "\(jsonObject.Title).json")
@@ -154,6 +166,10 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
 
+    }
+    
+    @objc func cancelButtonPressed () {
+        dismiss(animated: true, completion: nil)
     }
     
     func getUploadedFileSet(filename:String) {

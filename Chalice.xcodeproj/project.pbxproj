@@ -7,9 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2800FAA1211137400016B010 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800FAA0211137400016B010 /* PaddedTextField.swift */; };
+		2800FAA32111379D0016B010 /* PaddedUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800FAA22111379D0016B010 /* PaddedUILabel.swift */; };
+		2800FAA521115B200016B010 /* DeckListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800FAA421115B200016B010 /* DeckListViewController.swift */; };
+		2800FAA721115DC00016B010 /* DeckListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800FAA621115DC00016B010 /* DeckListTableViewCell.swift */; };
 		28177E1120E9C7AA009F21FE /* Template.json in Resources */ = {isa = PBXBuildFile; fileRef = 28177E1020E9C7AA009F21FE /* Template.json */; };
 		282EA22E20BCFBC60085514C /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282EA22D20BCFBC60085514C /* NewViewController.swift */; };
 		282EA23020BCFC2E0085514C /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */; };
+		28355F152111945F00E467F4 /* NordicaThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28355F142111945F00E467F4 /* NordicaThin.otf */; };
+		28355F172111966500E467F4 /* NordicaRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28355F162111966500E467F4 /* NordicaRegular.otf */; };
+		28355F1921119D4B00E467F4 /* PauseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28355F1821119D4B00E467F4 /* PauseMenu.swift */; };
+		28355F1B2111ABFC00E467F4 /* Quicksand_Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28355F1A2111ABFC00E467F4 /* Quicksand_Book.otf */; };
+		28355F1D2111B4DE00E467F4 /* Odin Rounded - Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28355F1C2111B4DE00E467F4 /* Odin Rounded - Bold.otf */; };
 		2849A02D20BE8FD80097EB85 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849A02C20BE8FD80097EB85 /* CardCell.swift */; };
 		286C7E7320BD1A0B00EF064A /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C7E7220BD1A0B00EF064A /* InformationView.swift */; };
 		286C7E7520BD461300EF064A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C7E7420BD461300EF064A /* Extensions.swift */; };
@@ -26,15 +35,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2800FAA0211137400016B010 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		2800FAA22111379D0016B010 /* PaddedUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedUILabel.swift; sourceTree = "<group>"; };
+		2800FAA421115B200016B010 /* DeckListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListViewController.swift; sourceTree = "<group>"; };
+		2800FAA621115DC00016B010 /* DeckListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListTableViewCell.swift; sourceTree = "<group>"; };
 		28177E1020E9C7AA009F21FE /* Template.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Template.json; sourceTree = "<group>"; };
 		282EA22D20BCFBC60085514C /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
+		28355F142111945F00E467F4 /* NordicaThin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NordicaThin.otf; path = ../../../../Documents/Fonts/nordica/NordicaThin.otf; sourceTree = "<group>"; };
+		28355F162111966500E467F4 /* NordicaRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NordicaRegular.otf; path = ../../../../Documents/Fonts/nordica/NordicaRegular.otf; sourceTree = "<group>"; };
+		28355F1821119D4B00E467F4 /* PauseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseMenu.swift; sourceTree = "<group>"; };
+		28355F1A2111ABFC00E467F4 /* Quicksand_Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Quicksand_Book.otf; path = ../../../../Documents/Fonts/quicksand/Quicksand_Book.otf; sourceTree = "<group>"; };
+		28355F1C2111B4DE00E467F4 /* Odin Rounded - Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Odin Rounded - Bold.otf"; path = "../../../../Documents/Fonts/odin_rounded/Odin Rounded - Bold.otf"; sourceTree = "<group>"; };
 		2849A02C20BE8FD80097EB85 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		286C7E7220BD1A0B00EF064A /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		286C7E7420BD461300EF064A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		286C7E7720BD4FA300EF064A /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Bold.ttf"; path = "../../../../Documents/Fonts/comfortaa/Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
-		286C7E7820BD4FA300EF064A /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Light.ttf"; path = "../../../../Documents/Fonts/comfortaa/Comfortaa-Light.ttf"; sourceTree = "<group>"; };
-		286C7E7920BD4FA400EF064A /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comfortaa-Regular.ttf"; path = "../../../../Documents/Fonts/comfortaa/Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		2880791320E6237500A0FFC1 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		28B0D84020BBEAE4003BAE81 /* Chalice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chalice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,12 +75,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2800FAA821115E690016B010 /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				2849A02C20BE8FD80097EB85 /* CardCell.swift */,
+				28E349EC20E912F9004775E9 /* RuleCell.swift */,
+				2800FAA621115DC00016B010 /* DeckListTableViewCell.swift */,
+			);
+			path = TableCells;
+			sourceTree = "<group>";
+		};
 		286C7E7620BD4F8E00EF064A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				286C7E7720BD4FA300EF064A /* Comfortaa-Bold.ttf */,
-				286C7E7820BD4FA300EF064A /* Comfortaa-Light.ttf */,
-				286C7E7920BD4FA400EF064A /* Comfortaa-Regular.ttf */,
+				28355F142111945F00E467F4 /* NordicaThin.otf */,
+				28355F1A2111ABFC00E467F4 /* Quicksand_Book.otf */,
+				28355F1C2111B4DE00E467F4 /* Odin Rounded - Bold.otf */,
+				28355F162111966500E467F4 /* NordicaRegular.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -114,11 +140,13 @@
 		28B0D86120BC3921003BAE81 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */,
 				286C7E7220BD1A0B00EF064A /* InformationView.swift */,
-				2849A02C20BE8FD80097EB85 /* CardCell.swift */,
+				2800FAA821115E690016B010 /* TableCells */,
 				2880791320E6237500A0FFC1 /* ProgressView.swift */,
-				28E349EC20E912F9004775E9 /* RuleCell.swift */,
+				282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */,
+				2800FAA0211137400016B010 /* PaddedTextField.swift */,
+				2800FAA22111379D0016B010 /* PaddedUILabel.swift */,
+				28355F1821119D4B00E467F4 /* PauseMenu.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,6 +157,7 @@
 				282EA22D20BCFBC60085514C /* NewViewController.swift */,
 				28BB5B8720C29F5F00404C77 /* MenuViewController.swift */,
 				28E5FC2920E7C129000006FD /* CreateViewController.swift */,
+				2800FAA421115B200016B010 /* DeckListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -203,9 +232,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				28177E1120E9C7AA009F21FE /* Template.json in Resources */,
+				28355F152111945F00E467F4 /* NordicaThin.otf in Resources */,
+				28355F1B2111ABFC00E467F4 /* Quicksand_Book.otf in Resources */,
 				28B0D85120BBEAE4003BAE81 /* LaunchScreen.storyboard in Resources */,
+				28355F172111966500E467F4 /* NordicaRegular.otf in Resources */,
 				28B0D84E20BBEAE4003BAE81 /* Assets.xcassets in Resources */,
 				28B0D86020BC0608003BAE81 /* Default.json in Resources */,
+				28355F1D2111B4DE00E467F4 /* Odin Rounded - Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,14 +250,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				28E5FC2A20E7C129000006FD /* CreateViewController.swift in Sources */,
+				28355F1921119D4B00E467F4 /* PauseMenu.swift in Sources */,
 				28E349ED20E912F9004775E9 /* RuleCell.swift in Sources */,
 				2849A02D20BE8FD80097EB85 /* CardCell.swift in Sources */,
 				286C7E7320BD1A0B00EF064A /* InformationView.swift in Sources */,
+				2800FAA32111379D0016B010 /* PaddedUILabel.swift in Sources */,
+				2800FAA1211137400016B010 /* PaddedTextField.swift in Sources */,
 				28B0D84420BBEAE4003BAE81 /* AppDelegate.swift in Sources */,
+				2800FAA521115B200016B010 /* DeckListViewController.swift in Sources */,
 				286C7E7520BD461300EF064A /* Extensions.swift in Sources */,
 				28BB5B8A20C2A2F100404C77 /* RelativeLayoutUtility.swift in Sources */,
 				282EA23020BCFC2E0085514C /* UPCarouselFlowLayout.swift in Sources */,
 				282EA22E20BCFBC60085514C /* NewViewController.swift in Sources */,
+				2800FAA721115DC00016B010 /* DeckListTableViewCell.swift in Sources */,
 				2880791420E6237500A0FFC1 /* ProgressView.swift in Sources */,
 				28B0D85D20BBFFEC003BAE81 /* Card.swift in Sources */,
 				28BB5B8820C29F5F00404C77 /* MenuViewController.swift in Sources */,
