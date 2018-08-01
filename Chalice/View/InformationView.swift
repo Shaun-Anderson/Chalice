@@ -26,10 +26,7 @@ class InformationView: UIView {
         guard let boldFont = UIFont(name: "Helvetica-Bold", size: 18) else {
             fatalError("Could not find font")
         }
-        for family in UIFont.familyNames.sorted() {
-            let names = UIFont.fontNames(forFamilyName: family)
-            print("Family: \(family) Font names: \(names)")
-        }
+
         guard let regularFont = UIFont(name: "QuicksandBook-Regular", size: UIFont.labelFontSize) else {
             fatalError("Failed to load the CustomFont-Light font.")
         }

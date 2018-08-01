@@ -27,9 +27,9 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
     
     @IBInspectable open var sideItemScale: CGFloat = 0.6
     @IBInspectable open var sideItemAlpha: CGFloat = 0.6
-    //open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: -100)
-    open var spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: -100)
-    fileprivate var state = LayoutState(size: CGSize.zero, direction: .horizontal)
+    open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: -100)
+    //open var spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: -100)
+    fileprivate var state = LayoutState(size: CGSize.zero, direction: .vertical)
     
     
     override open func prepare() {
@@ -42,15 +42,6 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
             self.updateLayout()
             self.state = currentState
         }
-    }
-    
-    override open func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attribute = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath as IndexPath)
-        
-        //attribute?.transform = (attribute?.transform.translatedBy(x: 0, y: 0))!
-        attribute?.alpha = 0.0
-        return attribute
-        
     }
     
     fileprivate func setupCollectionView() {
@@ -106,11 +97,11 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         let ratio = (maxDistance - distance)/maxDistance
         
 //        let alpha = ratio * (1 - self.sideItemAlpha) + self.sideItemAlpha
-//        let scale = ratio * (1 - self.sideItemScale) + self.sideItemScale
+//       let scale = ratio * (1 - self.sideItemScale) + self.sideItemScale
 //        let xOffset = ratio * (1 - 80) + 80
 //        attributes.alpha = alpha
 //        attributes.transform3D = CATransform3DConcat(CATransform3DScale(CATransform3DIdentity, scale, scale, 1), CATransform3DTranslate(CATransform3DIdentity, xOffset, 0, 0))
-//        //attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
+        //attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
 //        attributes.zIndex = Int(alpha * 10)
         
         return attributes
@@ -136,6 +127,7 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
             targetContentOffset = CGPoint(x: proposedContentOffset.x, y: floor(closest.center.y - midSide))
         }
         
+        print(self.sectionInset)
         return targetContentOffset
     }
 }

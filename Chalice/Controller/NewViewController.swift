@@ -47,11 +47,11 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
 
     }
     
-    override func viewDidLayoutSubviews() {
-        UIView.animate(withDuration: 3, delay: 0, animations: {
-            self.collectionView?.alpha = 1
-        })
-    }
+//    override func viewDidLayoutSubviews() {
+//        UIView.animate(withDuration: 3, delay: 0, animations: {
+//            self.collectionView?.alpha = 1
+//        })
+//    }
     
     // MARK: - Other functions
     
@@ -74,7 +74,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         // Collection view initialization, the collectionView must be
         // initialized with a layout object.
-        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - UIApplication.shared.statusBarFrame.height), collectionViewLayout: layout)
+        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), collectionViewLayout: layout)
         // This line if for able programmatic constrains.
         self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
         // CollectionView delegates and dataSource:
@@ -107,7 +107,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func setupLayout(){
-        self.currentPage = 0
+        self.currentPage = 2
     }
     
     // MARK: - GestureRecognizerDelegate
