@@ -29,7 +29,9 @@ class CardCell: UICollectionViewCell {
     var bottomSuit: UIImageView
     
     var panGesture: UIPanGestureRecognizer
-    
+    var leftSwipeGesture: UISwipeGestureRecognizer
+    var rightSwipeGesture: UISwipeGestureRecognizer
+
     // MARK: - Initialization
     
     override init(frame: CGRect) {
@@ -54,8 +56,10 @@ class CardCell: UICollectionViewCell {
         backCardImage.layer.cornerRadius = 12
         backView.addSubview(backCardImage)
         panGesture = UIPanGestureRecognizer()
-        
-        guard let boldFont = UIFont(name: "NordicaThin", size: UIFont.labelFontSize) else {
+        leftSwipeGesture = UISwipeGestureRecognizer()
+        rightSwipeGesture = UISwipeGestureRecognizer()
+
+        guard let boldFont = UIFont(name: "QuicksandBook-Regular", size: UIFont.labelFontSize) else {
             fatalError("""
         Failed to load the "CustomFont-Light" font.
         Make sure the font file is included in the project and the font name is spelled correctly.
@@ -77,13 +81,13 @@ class CardCell: UICollectionViewCell {
         self.layer.cornerRadius = 12
         self.backgroundColor = UIColor.darkGray
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(SwipeLeft(_:)))
-        swipeLeft.direction = .left
-        self.addGestureRecognizer(swipeLeft)
+        leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(SwipeLeft(_:)))
+        leftSwipeGesture.direction = .left
+        self.addGestureRecognizer(leftSwipeGesture)
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(SwipeRight(_:)))
-        swipeRight.direction = .right
-        self.addGestureRecognizer(swipeRight)
+        rightSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(SwipeRight(_:)))
+        rightSwipeGesture.direction = .right
+        self.addGestureRecognizer(rightSwipeGesture)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -102,12 +106,14 @@ class CardCell: UICollectionViewCell {
         bottomText.text = ""
         bottomSuit.image = nil
         //self.gestureRecognizers?.remove(at: 2)
+        self.leftSwipeGesture.isEnabled = true
         self.panGesture.isEnabled = false
     }
     
     // MARK: - Other functions
     
     func Reveal () {
+        revealed = true
         if(card?.rank == "K")
         {
             self.backgroundColor = UIColor.yellow
@@ -120,7 +126,7 @@ class CardCell: UICollectionViewCell {
         }
         self.frontView.isHidden = false
         self.backView.isHidden = true
-        self.panGesture.isEnabled = true
+        self.leftSwipeGesture.isEnabled = false
         
         topText.frame = CGRect(x: 25, y: 25, width: 50, height: 50)
         topSuit.frame = CGRect(x: 37.5, y: 75, width: 25, height: 25)
@@ -135,6 +141,7 @@ class CardCell: UICollectionViewCell {
         bottomText.text = card?.rank
         bottomText.textAlignment = NSTextAlignment.center
         bottomSuit.image = UIImage(named: (card?.suit?.rawValue)!)
+        bottomSuit.tintColor = UIColor.darkGray
         bottomText.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         bottomSuit.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
     }
@@ -144,12 +151,22 @@ class CardCell: UICollectionViewCell {
         originalCenter = self.center
         delegate!.RevealCard(view: self, card: self)
         Reveal()
+        print("nihuihiuhiu")
     }
     // Take the values of the currcent swipe
     @objc func SwipeRight(_ gestureRecognizer: UISwipeGestureRecognizer) {
-        originalCenter = self.center
-        delegate!.RevealCard(view: self, card: self)
-        Reveal()
+        print(revealed)
+        if(!revealed)
+        {
+            originalCenter = self.center
+            delegate!.RevealCard(view: self, card: self)
+            Reveal()
+        }
+        else
+        {
+            print("iugiugiugiu")
+            delegate!.DismissCard(card: self)
+        }
     }
     // Take the values of the currcent swipe
     @objc func SwipeDown(_ gestureRecognizer: UIPanGestureRecognizer) {

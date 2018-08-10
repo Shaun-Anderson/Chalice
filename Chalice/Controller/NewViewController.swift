@@ -3,7 +3,8 @@ import UIKit
 class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CardCellDelegate, UIGestureRecognizerDelegate {
 
     // MARK: - Variables
-    
+    var pauseMenu: UIView!
+    var pauseButton : UIButton?
     var ruleSet: ResponseData?
     var deck = [Card]()
     // UI
@@ -24,6 +25,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     // MARK: - UIViewController Methods
     
     override func viewDidLoad() {
+        pauseMenu = UIView(frame: .zero)
         super.viewDidLoad()
         
         deck = generateDeck(ruleset: ruleSet!)!
@@ -35,16 +37,41 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         progressTracker?.fullImage = #imageLiteral(resourceName: "FilledKing")
         progressTracker?.emptyImage = #imageLiteral(resourceName: "EmptyCrown")
         progressTracker?.contentMode = UIViewContentMode.scaleAspectFit
-
         progressTracker?.type = .wholeRatings
         progressTracker?.rating = 4;
         
+        // Pause button
+        pauseButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 50, width: 50, height: 50))
+        pauseButton?.setImage(#imageLiteral(resourceName: "UI_Icon_Pause"), for: .normal)
+        pauseButton?.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+        pauseButton?.setTitleColor(UIColor.white, for: .normal)
+        pauseButton?.addTarget(self, action:#selector(self.PauseButtonPressed), for: .touchUpInside)
+        
+        // Pause menu, can be moved into own file.
+        pauseMenu = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        pauseMenu.isHidden = true
+
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = pauseMenu.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        let pauseTitle = UITextField(frame: CGRect(x: 0, y: 100, width: pauseMenu.frame.width, height: 100))
+        pauseTitle.text = "Pause Menu"
+        pauseTitle.textColor = UIColor.white
+        pauseTitle.textAlignment = .center
+        
+        pauseMenu.addSubview(blurEffectView)
+        pauseMenu.addSubview(pauseTitle)
+
         self.view.addSubview(progressTracker!)
 
         self.addCollectionView()
         self.setupLayout()
+        self.collectionView?.layoutIfNeeded()
         self.view.addSubview(statusBarView)
-
+        self.view.addSubview(pauseMenu)
+        self.view.addSubview(pauseButton!)
     }
     
 //    override func viewDidLayoutSubviews() {
@@ -85,7 +112,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         // Spacing between cells:
         let spacingLayout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
-        spacingLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 100)
+        spacingLayout.spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: 0)
         
         self.collectionView?.backgroundColor = UIColor.clear
         self.view.addSubview(self.collectionView!)
@@ -107,7 +134,22 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func setupLayout(){
-        self.currentPage = 2
+        self.currentPage = 0
+    }
+    
+    @objc func PauseButtonPressed () {
+        pauseMenu?.isHidden = !(pauseMenu?.isHidden)!
+        print(pauseMenu?.isHidden)
+        if(pauseMenu?.isHidden == true)
+        {
+            print("Unpause")
+            pauseButton?.setImage(UIImage(named: "UI_Icon_Pause"), for: .normal)
+        }
+        else
+        {
+            print("Paused")
+            pauseButton?.setImage(UIImage(named: "UI_Icon_Play"), for: .normal)
+        }
     }
     
     // MARK: - GestureRecognizerDelegate
@@ -164,8 +206,6 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         UIView.transition(with: card, duration: 0.5, options: [.transitionFlipFromLeft],
                           animations: {
-//                            card.frame.size.width = self.view.frame.width - 5
-//                            card.frame.size.height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - 5
                             card.center.y = card.originalCenter.y
                             card.center.x = card.originalCenter.x
                             //card.frame = (self.view?.frame)!
@@ -185,24 +225,24 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
                             })
         })
     }
-    
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+    }
     func DismissCard(card: CardCell) {
         self.collectionView?.isScrollEnabled = true
         self.cardSelected = false
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: [], animations: {
             card.center.x = 1000
         }, completion: nil)
         
-        func delay(_ delay:Double, closure:@escaping ()->()) {
-            let when = DispatchTime.now() + delay
-            DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
-        }
+
         
         delay(0.5, closure: {
             card.alpha = 0
             self.informationView?.removeFromSuperview()
-            UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+            UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: {
                 if let indexPath = self.collectionView?.indexPath(for: card)
                 {
                     print("DELETE \(indexPath.row)" + (card.card?.rank)!)

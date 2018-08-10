@@ -14,7 +14,6 @@ import UIKit
 open class ProgressView: UIView {
     
     // MARK: Properties
-    
     /// Array of empty image views
     private var emptyImageViews: [UIImageView] = []
     
@@ -112,7 +111,6 @@ open class ProgressView: UIView {
     /// Float rating view type
     @IBInspectable open var type: FloatRatingViewType = .wholeRatings
     
-    var pauseButton : UIButton?
     // MARK: Initializations
     
     required override public init(frame: CGRect) {
@@ -120,14 +118,10 @@ open class ProgressView: UIView {
         
         initImageViews()
         
-        pauseButton = UIButton(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.width))
-        pauseButton?.setTitle("||", for: .normal)
-        pauseButton?.setTitleColor(UIColor.white, for: .normal)
-        cardNumberLabel = UILabel(frame: CGRect(x: 0, y: self.frame.height - 65, width: 50, height: 75))
+        cardNumberLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         cardNumberLabel?.textAlignment = NSTextAlignment.center
         cardNumberLabel?.textColor = UIColor.gray
         addSubview(cardNumberLabel!)
-        addSubview(pauseButton!)
     }
     
     required public init?(coder aDecoder: NSCoder) {

@@ -42,7 +42,7 @@ class MenuViewController: UIViewController {
         
         view.addSubview(titleLabel!)
         
-        UIView.animate(withDuration: 1, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.mainImage?.alpha = 1
             self.mainImage?.center.y = 150
         }, completion: { _ in

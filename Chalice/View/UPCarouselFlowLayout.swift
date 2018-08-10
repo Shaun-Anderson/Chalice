@@ -27,8 +27,8 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
     
     @IBInspectable open var sideItemScale: CGFloat = 0.6
     @IBInspectable open var sideItemAlpha: CGFloat = 0.6
-    open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: -100)
-    //open var spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: -100)
+    //open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: -100)
+    open var spacingMode = UPCarouselFlowLayoutSpacingMode.overlap(visibleOffset: -100)
     fileprivate var state = LayoutState(size: CGSize.zero, direction: .vertical)
     
     
@@ -86,22 +86,22 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
     
     fileprivate func transformLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         guard let collectionView = self.collectionView else { return attributes }
-        let isHorizontal = (self.scrollDirection == .horizontal)
-        
-        let collectionCenter = isHorizontal ? collectionView.frame.size.width/2 : collectionView.frame.size.height/2
-        let offset = isHorizontal ? collectionView.contentOffset.x : collectionView.contentOffset.y
-        let normalizedCenter = (isHorizontal ? attributes.center.x : attributes.center.y) - offset
-        
-        let maxDistance = (isHorizontal ? self.itemSize.width : self.itemSize.height) + self.minimumLineSpacing
-        let distance = min(abs(collectionCenter - normalizedCenter), maxDistance)
-        let ratio = (maxDistance - distance)/maxDistance
+//        let isHorizontal = (self.scrollDirection == .horizontal)
+//
+//        let collectionCenter = isHorizontal ? collectionView.frame.size.width/2 : collectionView.frame.size.height/2
+//        let offset = isHorizontal ? collectionView.contentOffset.x : collectionView.contentOffset.y
+//        let normalizedCenter = (isHorizontal ? attributes.center.x : attributes.center.y) - offset
+//
+//        let maxDistance = (isHorizontal ? self.itemSize.width : self.itemSize.height) + self.minimumLineSpacing
+//        let distance = min(abs(collectionCenter - normalizedCenter), maxDistance)
+//        let ratio = (maxDistance - distance)/maxDistance
         
 //        let alpha = ratio * (1 - self.sideItemAlpha) + self.sideItemAlpha
-//       let scale = ratio * (1 - self.sideItemScale) + self.sideItemScale
+//        let scale = ratio * (1 - self.sideItemScale) + self.sideItemScale
 //        let xOffset = ratio * (1 - 80) + 80
 //        attributes.alpha = alpha
 //        attributes.transform3D = CATransform3DConcat(CATransform3DScale(CATransform3DIdentity, scale, scale, 1), CATransform3DTranslate(CATransform3DIdentity, xOffset, 0, 0))
-        //attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
+//        //attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
 //        attributes.zIndex = Int(alpha * 10)
         
         return attributes
@@ -127,7 +127,6 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
             targetContentOffset = CGPoint(x: proposedContentOffset.x, y: floor(closest.center.y - midSide))
         }
         
-        print(self.sectionInset)
         return targetContentOffset
     }
 }

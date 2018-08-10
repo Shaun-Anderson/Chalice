@@ -12,6 +12,7 @@
 		2800FAA521115B200016B010 /* DeckListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800FAA421115B200016B010 /* DeckListViewController.swift */; };
 		2800FAA721115DC00016B010 /* DeckListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800FAA621115DC00016B010 /* DeckListTableViewCell.swift */; };
 		28177E1120E9C7AA009F21FE /* Template.json in Resources */ = {isa = PBXBuildFile; fileRef = 28177E1020E9C7AA009F21FE /* Template.json */; };
+		282D19B3211D714A001FA52F /* Default.json in Resources */ = {isa = PBXBuildFile; fileRef = 282D19B2211D714A001FA52F /* Default.json */; };
 		282EA22E20BCFBC60085514C /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282EA22D20BCFBC60085514C /* NewViewController.swift */; };
 		282EA23020BCFC2E0085514C /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */; };
 		28355F152111945F00E467F4 /* NordicaThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28355F142111945F00E467F4 /* NordicaThin.otf */; };
@@ -27,7 +28,6 @@
 		28B0D84E20BBEAE4003BAE81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28B0D84D20BBEAE4003BAE81 /* Assets.xcassets */; };
 		28B0D85120BBEAE4003BAE81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B0D84F20BBEAE4003BAE81 /* LaunchScreen.storyboard */; };
 		28B0D85D20BBFFEC003BAE81 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0D85C20BBFFEC003BAE81 /* Card.swift */; };
-		28B0D86020BC0608003BAE81 /* Default.json in Resources */ = {isa = PBXBuildFile; fileRef = 28B0D85F20BC0608003BAE81 /* Default.json */; };
 		28BB5B8820C29F5F00404C77 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB5B8720C29F5F00404C77 /* MenuViewController.swift */; };
 		28BB5B8A20C2A2F100404C77 /* RelativeLayoutUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */; };
 		28E349ED20E912F9004775E9 /* RuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E349EC20E912F9004775E9 /* RuleCell.swift */; };
@@ -40,6 +40,7 @@
 		2800FAA421115B200016B010 /* DeckListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListViewController.swift; sourceTree = "<group>"; };
 		2800FAA621115DC00016B010 /* DeckListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListTableViewCell.swift; sourceTree = "<group>"; };
 		28177E1020E9C7AA009F21FE /* Template.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Template.json; sourceTree = "<group>"; };
+		282D19B2211D714A001FA52F /* Default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Default.json; sourceTree = "<group>"; };
 		282EA22D20BCFBC60085514C /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
 		28355F142111945F00E467F4 /* NordicaThin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NordicaThin.otf; path = ../../../../Documents/Fonts/nordica/NordicaThin.otf; sourceTree = "<group>"; };
@@ -57,7 +58,6 @@
 		28B0D85020BBEAE4003BAE81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28B0D85220BBEAE4003BAE81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28B0D85C20BBFFEC003BAE81 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		28B0D85F20BC0608003BAE81 /* Default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Default.json; path = ../../../Desktop/Default.json; sourceTree = "<group>"; };
 		28BB5B8720C29F5F00404C77 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeLayoutUtility.swift; sourceTree = "<group>"; };
 		28E349EC20E912F9004775E9 /* RuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCell.swift; sourceTree = "<group>"; };
@@ -120,8 +120,8 @@
 				28B0D86220BC3927003BAE81 /* Controller */,
 				28B0D86120BC3921003BAE81 /* View */,
 				28B0D85B20BBFFDF003BAE81 /* Model */,
-				28B0D85F20BC0608003BAE81 /* Default.json */,
 				28177E1020E9C7AA009F21FE /* Template.json */,
+				282D19B2211D714A001FA52F /* Default.json */,
 				28B0D84D20BBEAE4003BAE81 /* Assets.xcassets */,
 				28B0D84F20BBEAE4003BAE81 /* LaunchScreen.storyboard */,
 				28B0D85220BBEAE4003BAE81 /* Info.plist */,
@@ -232,12 +232,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				28177E1120E9C7AA009F21FE /* Template.json in Resources */,
+				282D19B3211D714A001FA52F /* Default.json in Resources */,
 				28355F152111945F00E467F4 /* NordicaThin.otf in Resources */,
 				28355F1B2111ABFC00E467F4 /* Quicksand_Book.otf in Resources */,
 				28B0D85120BBEAE4003BAE81 /* LaunchScreen.storyboard in Resources */,
 				28355F172111966500E467F4 /* NordicaRegular.otf in Resources */,
 				28B0D84E20BBEAE4003BAE81 /* Assets.xcassets in Resources */,
-				28B0D86020BC0608003BAE81 /* Default.json in Resources */,
 				28355F1D2111B4DE00E467F4 /* Odin Rounded - Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
