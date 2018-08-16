@@ -7,6 +7,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var pauseButton : UIButton?
     var ruleSet: ResponseData?
     var deck = [Card]()
+    var tempDeck = [Int]()
     // UI
     var informationView: InformationView?
     var progressTracker: ProgressView?
@@ -39,6 +40,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         progressTracker?.contentMode = UIViewContentMode.scaleAspectFit
         progressTracker?.type = .wholeRatings
         progressTracker?.rating = 4;
+        progressTracker?.cardsRemaining = 54
         
         // Pause button
         pauseButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height - 50, width: 50, height: 50))
@@ -68,7 +70,6 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
 
         self.addCollectionView()
         self.setupLayout()
-        self.collectionView?.layoutIfNeeded()
         self.view.addSubview(statusBarView)
         self.view.addSubview(pauseMenu)
         self.view.addSubview(pauseButton!)
@@ -103,12 +104,35 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         // initialized with a layout object.
         self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), collectionViewLayout: layout)
         // This line if for able programmatic constrains.
-        self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
+        self.collectionView?.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        //self.collectionView?.translatesAutoresizingMaskIntoConstraints = true
         // CollectionView delegates and dataSource:
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
-        // Registering the class for the collection view cells
         self.collectionView?.register(CardCell.self, forCellWithReuseIdentifier: "cellId")
+        
+//        var tempDeck = generateDeck(ruleset: ruleSet!)!
+//        tempDeck = tempDeck.shuffled()
+//
+//        self.collectionView?.isUserInteractionEnabled = false
+//        self.collectionView?.alpha = 0.5
+//        var index: Int = 0
+//        var timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true){ t in
+//
+//            self.collectionView?.performBatchUpdates({
+//                self.deck.append(tempDeck[index])
+//                let path = IndexPath(item: index, section: 0)
+//                self.collectionView?.insertItems(at: [path])
+//            }, completion: nil)
+//
+//            if index >= tempDeck.count - 1 {
+//                self.collectionView?.isUserInteractionEnabled = true
+//                self.collectionView?.alpha = 1
+//                t.invalidate()
+//            }
+//            index += 1
+//
+//        }
         
         // Spacing between cells:
         let spacingLayout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
@@ -165,7 +189,6 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        progressTracker?.cardsRemaining = deck.count
         return deck.count
     }
     
@@ -236,7 +259,8 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         UIView.animate(withDuration: 0.25, delay: 0.0, options: [], animations: {
             card.center.x = 1000
         }, completion: nil)
-        
+        self.progressTracker?.cardsRemaining -= 1
+
 
         
         delay(0.5, closure: {
