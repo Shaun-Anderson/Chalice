@@ -10,6 +10,10 @@ import UIKit
 
 class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, RuleCellDelegate {
 
+    // MARK: - Properties
+    
+    var originalName: String?
+    
     // MARK: - RuleCellDelegate Functions
     
     func nameEditingFinished(index: Int, name: String) {
@@ -57,6 +61,11 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         nameTextView = UITextField(frame: CGRect(x: self.view.frame.width/2-100, y: y, width: 200, height: 50))
         nameTextView?.attributedPlaceholder = NSAttributedString(string: "Deck Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
         nameTextView?.textAlignment = .center
+        print("awdkhawoidhawojdaw \(originalName)")
+
+        if let name = originalName {
+            nameTextView?.text = name
+        }
         
         createButton = UIButton(frame: CGRect(x: self.view.frame.width-75, y: y, width: 50, height: 50))
         createButton?.setTitle("Create", for: .normal)
@@ -109,16 +118,103 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return ResponseData(Title: "", Cards: [])
     }
 
+    // TODO: add this to the background thread
+    
     @objc func saveFile()
     {
-        // Error Checking
+        
+        // Set Values
+        ruleset?.Title = (nameTextView?.text)!
+        
+        // Check if data is valid/complete
+        if (!dataIsValid()) { return }
+        
+        // Retrieve base url for document directory
+        let fileManager = FileManager.default
+        // Encode to JSON
+        let encodedData = try? JSONEncoder().encode(ruleset)
+
+        do {
+            
+            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
+            let fileURL = documentDirectory.appendingPathComponent((ruleset?.Title)!).appendingPathExtension("json")
+            
+            // If was editing an already create file just rename and change data.
+            if let ogName = originalName {
+                do {
+                    var originPath = documentDirectory.appendingPathComponent("\(ogName).json")
+                    let file = try FileHandle(forWritingTo: originPath)
+                    // Set Data
+                    file.write(encodedData!)
+                    // Change Name
+                    var resourceValues = URLResourceValues()
+                    resourceValues.name = ruleset?.Title
+                    try originPath.setResourceValues(resourceValues)
+                    
+                } catch {
+                    print(error)
+                }
+            }
+            
+            // Check if file with title already exists.
+            if fileManager.fileExists(atPath: fileURL.path) {
+                
+                // TODO: Create alert for overwrite.
+                
+            }
+            else {
+                
+                // No file exists with name
+                
+                // If was editing an already existing file delete it
+                
+                do{
+                    // TODO Check if exisitng.
+                    let fileURL = documentDirectory.appendingPathComponent((ruleset?.Title)!).appendingPathExtension("json")
+                    // Set the data we want to write
+                    do{
+                        try encodedData?.write(to: fileURL)
+                        print(fileURL)
+                    }
+                    catch {
+                        print("Writing Error")
+                    }
+                }
+                catch
+                {
+                    // ERROR
+                }
+                
+            }
+            
+
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @objc func cancelButtonPressed () {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func dataIsValid () -> Bool {
+        
+        // Title Check
+        if(ruleset?.Title == nil)
+        {
+            return false
+        }
         
         // Name Checking
         if(nameTextView?.text!.trimmingCharacters(in: .whitespaces).isEmpty)!
         {
             print("Name must be something")
-            return
+            return false
         }
+        
         // Cell Checking
         var errorClean = true
         if let ruleset = ruleset {
@@ -133,43 +229,11 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         if(!errorClean)
         {
-            // TODO: Display error message?
-            return
+            // TODO: Display error message for cell missing argument
+            return false
         }
         
-        // Set Values
-        ruleset?.Title = (nameTextView?.text)!
-        if(ruleset?.Title == nil)
-        {
-            // Create rename alert
-        }
-        
-        let encodedData = try? JSONEncoder().encode(ruleset)
-        //let file: FileHandle? = FileHandle(forWritingAtPath: "\(jsonObject.Title).json")
-        let fileManager = FileManager.default
-        do{
-            // TODO Check if exisitng.
-            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
-            let fileURL = documentDirectory.appendingPathComponent((ruleset?.Title)!).appendingPathExtension("json")
-            // Set the data we want to write
-            do{
-                try encodedData?.write(to: fileURL)
-                print(fileURL)
-            }
-            catch {
-                print("Writing Error")
-            }
-        }
-        catch
-        {
-            // ERROR
-        }
-        
-
-    }
-    
-    @objc func cancelButtonPressed () {
-        dismiss(animated: true, completion: nil)
+        return true
     }
     
     func getUploadedFileSet(filename:String) {
