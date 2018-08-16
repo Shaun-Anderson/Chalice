@@ -42,9 +42,9 @@ class CardCell: UICollectionViewCell {
         frontView.isHidden = true;
         // Create UI elements
         topText = UILabel(frame: CGRect(x: 25, y: 25, width: 50, height: 50))
-        topSuit = UIImageView(frame: CGRect(x: 37.5, y: 75, width: 25, height: 25))
+        topSuit = UIImageView(frame: CGRect(x: 37.5, y: 75, width: 15, height: 15))
         bottomText = UILabel(frame: CGRect(x: frame.width - 75, y: frame.height - 75, width: 50, height: 50))
-        bottomSuit = UIImageView(frame: CGRect(x: frame.width - 63.5, y: frame.height - 100, width: 25, height: 25))
+        bottomSuit = UIImageView(frame: CGRect(x: frame.width - 63.5, y: frame.height - 100, width: 15, height: 15))
         
         frontView.addSubview(topText)
         frontView.addSubview(topSuit)
@@ -129,9 +129,9 @@ class CardCell: UICollectionViewCell {
         self.leftSwipeGesture.isEnabled = false
         
         topText.frame = CGRect(x: 25, y: 25, width: 50, height: 50)
-        topSuit.frame = CGRect(x: 37.5, y: 75, width: 25, height: 25)
+        topSuit.frame = CGRect(x: topText.center.x - 7.5, y: 75, width: 15, height: 15)
         bottomText.frame = CGRect(x: frame.width - 75, y: frame.height - 75, width: 50, height: 50)
-        bottomSuit.frame = CGRect(x: frame.width - 63.5, y: frame.height - 100, width: 25, height: 25)
+        bottomSuit.frame = CGRect(x: bottomText.center.x - 7.5, y: bottomText.frame.origin.y - 15, width: 15, height: 15)
         
         // Set UI specifcs
         topText.text = card?.rank
