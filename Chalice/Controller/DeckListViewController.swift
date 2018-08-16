@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DeckListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DeckListViewController: UIViewController {
 
     var decksNames: [String] = []
 
@@ -72,14 +72,23 @@ class DeckListViewController: UIViewController, UITableViewDelegate, UITableView
         dismiss(animated: true, completion: nil)
     }
     
-
-    // MARK: - TableView DataSource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return decksNames.count
+    @objc func addButtonPressed () {
+        // TODO: Add functionality
+        let nextVC = CreateViewController()
+        self.present(nextVC, animated: true, completion: nil)
     }
     
-    // MARK: - TableView Delegate
+
+    
+
+    
+    
+
+}
+
+// MARK: - TableView Delegate
+
+extension DeckListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -89,4 +98,22 @@ class DeckListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.deckNameLabel?.text = decksNames[indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = CreateViewController()
+        print(decksNames[indexPath.row])
+        nextVC.originalName = decksNames[indexPath.row]
+        self.present(nextVC, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: - TableView DataSource
+
+extension DeckListViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return decksNames.count
+    }
+    
 }
