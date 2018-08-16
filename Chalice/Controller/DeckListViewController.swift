@@ -10,9 +10,77 @@ import UIKit
 
 class DeckListViewController: UIViewController {
 
+    // MARK: - Properties
+    
     var decksNames: [String] = []
+    var toGame : Bool = false
+    
+    var tableView: UITableView?
+    var backButton: UIButton?
 
-    func loadDecks () -> [String]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        decksNames = loadDeckNames()
+        
+        var y = UIApplication.shared.statusBarFrame.height
+        
+        backButton = UIButton(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
+        backButton?.backgroundColor = UIColor.red
+        backButton?.addTarget(self, action: #selector(self.cancelButtonPressed), for: .touchUpInside)
+
+        y += 100
+        
+        let bottomView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: y), size: CGSize(width: self.view.frame.width, height: self.view.frame.height - y)))
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: bottomView.frame.width, height: bottomView.frame.height))
+        tableView?.register(DeckListTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView?.separatorStyle = .none
+        tableView?.rowHeight = 50.0
+        tableView?.dataSource = self
+        tableView?.delegate = self
+        tableView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        bottomView.round(corners: [.topLeft, .topRight], radius: 10)
+        self.view.addSubview(backButton!)
+        bottomView.addSubview(tableView!)
+        self.view.addSubview(bottomView)
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - Actions
+    
+    @objc func cancelButtonPressed () {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func addButtonPressed () {
+        let nextVC = CreateViewController()
+        self.present(nextVC, animated: true, completion: nil)
+    }
+    
+    // MARK: - Other Functions
+
+    func loadJson(filename: String) -> ResponseData {
+        if(filename == "Default") {
+            if let url = Bundle.main.url(forResource: filename, withExtension: "json") {
+                print("NADS")
+                do {
+                    let data = try Data(contentsOf: url)
+                    let decoder = JSONDecoder()
+                    let jsonData = try decoder.decode(ResponseData.self, from: data)
+                    return jsonData
+                } catch {
+                    print("error:\(error)")
+                }
+            }
+        }
+        return ResponseData(Title: "", Cards: [])
+        
+    }
+    
+    func loadDeckNames () -> [String]
     {
         var tempArray: [String] = []
         tempArray.append("Default")
@@ -33,56 +101,6 @@ class DeckListViewController: UIViewController {
         
         return tempArray
     }
-    
-    var tableView: UITableView?
-    var backButton: UIButton?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        decksNames = loadDecks()
-        
-        var y = UIApplication.shared.statusBarFrame.height
-        // Set up top area
-        backButton = UIButton(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
-        backButton?.backgroundColor = UIColor.red
-        backButton?.addTarget(self, action: #selector(self.cancelButtonPressed), for: .touchUpInside)
-
-        y += 100
-        // Set up TableView
-        tableView = UITableView(frame: CGRect(origin: CGPoint(x: 0, y: y), size: CGSize(width: self.view.frame.width, height: self.view.frame.height - y)))
-        tableView?.register(DeckListTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView?.separatorStyle = .none
-        tableView?.rowHeight = 50.0
-        tableView?.dataSource = self
-        tableView?.delegate = self
-        decksNames.append("+")
-
-        
-        self.view.addSubview(backButton!)
-        self.view.addSubview(tableView!)
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @objc func cancelButtonPressed () {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func addButtonPressed () {
-        // TODO: Add functionality
-        let nextVC = CreateViewController()
-        self.present(nextVC, animated: true, completion: nil)
-    }
-    
-
-    
-
-    
-    
 
 }
 
@@ -100,12 +118,21 @@ extension DeckListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = CreateViewController()
-        print(decksNames[indexPath.row])
-        nextVC.originalName = decksNames[indexPath.row]
-        self.present(nextVC, animated: true, completion: nil)
+        if(toGame) {
+            
+            let nextVC = NewViewController()
+            nextVC.ruleSet = loadJson(filename: decksNames[indexPath.row])
+            self.present(nextVC, animated: true, completion: nil)
+            
+        } else {
+            
+            let nextVC = CreateViewController()
+            print(decksNames[indexPath.row])
+            nextVC.originalName = decksNames[indexPath.row]
+            self.present(nextVC, animated: true, completion: nil)
+            
+        }
     }
-    
 }
 
 // MARK: - TableView DataSource
