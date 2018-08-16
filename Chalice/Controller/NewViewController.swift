@@ -163,7 +163,6 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     @objc func PauseButtonPressed () {
         pauseMenu?.isHidden = !(pauseMenu?.isHidden)!
-        print(pauseMenu?.isHidden)
         if(pauseMenu?.isHidden == true)
         {
             print("Unpause")
