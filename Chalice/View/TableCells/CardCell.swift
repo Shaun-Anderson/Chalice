@@ -116,8 +116,7 @@ class CardCell: UICollectionViewCell {
         revealed = true
         if(card?.rank == "K")
         {
-            self.backgroundColor = UIColor.yellow
-            self.backgroundColor = UIColor(red: 255/255, green: 204/255, blue: 0/255, alpha: 1)
+            self.backgroundColor = Constants.kingColor
 
         }
         else
