@@ -1,6 +1,6 @@
 import UIKit
 
-class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CardCellDelegate, UIGestureRecognizerDelegate {
+class NewViewController: UIViewController {
 
     // MARK: - Variables
     var pauseMenu: UIView!
@@ -29,10 +29,13 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         pauseMenu = UIView(frame: .zero)
         super.viewDidLoad()
         
-        deck = generateDeck(ruleset: ruleSet!)!
-        deck = deck.shuffled()
+        deck = generateDeck(ruleset: ruleSet!)!.filter({$0.rank == "K"})
+        //deck = deck.shuffled()
+        
+        // Status bar view
         let statusBarView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: UIApplication.shared.statusBarFrame.height))
         statusBarView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.1)
+        
         // Add King Tracker
         progressTracker = ProgressView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: 50, height: view.frame.height - UIApplication.shared.statusBarFrame.height))
         progressTracker?.fullImage = #imageLiteral(resourceName: "FilledKing")
@@ -75,12 +78,6 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         self.view.addSubview(pauseButton!)
     }
     
-//    override func viewDidLayoutSubviews() {
-//        UIView.animate(withDuration: 3, delay: 0, animations: {
-//            self.collectionView?.alpha = 1
-//        })
-//    }
-    
     // MARK: - Other functions
     
     func addCollectionView(){
@@ -100,39 +97,12 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         // Setting the scroll direction
         layout.scrollDirection = .vertical
         
-        // Collection view initialization, the collectionView must be
-        // initialized with a layout object.
         self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), collectionViewLayout: layout)
-        // This line if for able programmatic constrains.
         self.collectionView?.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
-        //self.collectionView?.translatesAutoresizingMaskIntoConstraints = true
-        // CollectionView delegates and dataSource:
+        self.collectionView?.translatesAutoresizingMaskIntoConstraints = true
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
         self.collectionView?.register(CardCell.self, forCellWithReuseIdentifier: "cellId")
-        
-//        var tempDeck = generateDeck(ruleset: ruleSet!)!
-//        tempDeck = tempDeck.shuffled()
-//
-//        self.collectionView?.isUserInteractionEnabled = false
-//        self.collectionView?.alpha = 0.5
-//        var index: Int = 0
-//        var timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true){ t in
-//
-//            self.collectionView?.performBatchUpdates({
-//                self.deck.append(tempDeck[index])
-//                let path = IndexPath(item: index, section: 0)
-//                self.collectionView?.insertItems(at: [path])
-//            }, completion: nil)
-//
-//            if index >= tempDeck.count - 1 {
-//                self.collectionView?.isUserInteractionEnabled = true
-//                self.collectionView?.alpha = 1
-//                t.invalidate()
-//            }
-//            index += 1
-//
-//        }
         
         // Spacing between cells:
         let spacingLayout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
@@ -140,6 +110,22 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         self.collectionView?.backgroundColor = UIColor.clear
         self.view.addSubview(self.collectionView!)
+        
+    }
+    
+    func gameComplete () {
+        let endGameView = UIView(frame: CGRect(x: 0, y: -self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height))
+        endGameView.backgroundColor = Constants.kingColor
+        self.view.addSubview(endGameView)
+
+        UIView.setAnimationCurve(UIViewAnimationCurve.easeOut)
+        UIView.animate(withDuration: 1, animations: {
+            endGameView.center.y = self.view.center.y
+        }, completion: {(_ completed: Bool) -> Void in
+            let returnButton = UIButton(frame: CGRect(x: 0, y: endGameView.frame.height/2, width: endGameView.frame.width, height: 50))
+            returnButton.setTitle("Return", for: .normal)
+            endGameView.addSubview(returnButton)
+        })
         
     }
     
@@ -175,21 +161,43 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
-    // MARK: - GestureRecognizerDelegate
+    
+
+    
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+    }
+
+    
+}
+
+// MARK: - GestureRecognizerDelegate
+
+extension NewViewController : UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
     
-    // MARK: - Card Collection Delegate & DataSource
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension NewViewController : UICollectionViewDelegate {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let layout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
+        let pageSide = (layout.scrollDirection == .horizontal) ? self.pageSize.width : self.pageSize.height
+        let offset = (layout.scrollDirection == .horizontal) ? scrollView.contentOffset.x : scrollView.contentOffset.y
+        currentPage = Int(floor((offset - pageSide / 2) / pageSide) + 1)
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return deck.count
-    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension NewViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CardCell
@@ -200,42 +208,42 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         return cell
     }
     
-    // MARK: - UIScrollViewDelegate
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let layout = self.collectionView?.collectionViewLayout as! UPCarouselFlowLayout
-        let pageSide = (layout.scrollDirection == .horizontal) ? self.pageSize.width : self.pageSize.height
-        let offset = (layout.scrollDirection == .horizontal) ? scrollView.contentOffset.x : scrollView.contentOffset.y
-        currentPage = Int(floor((offset - pageSide / 2) / pageSide) + 1)
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
-    // MARK: - CardCellDelegate
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return deck.count
+    }
+    
+}
+
+// MARK: - CardCellDelegate
+
+extension NewViewController : CardCellDelegate {
     
     func RevealCard(view: UIView, card: CardCell) {
         collectionView?.isScrollEnabled = false
         cardSelected = true;
-//        card.removeFromSuperview()
-//        self.view.addSubview(card)
-        print((self.collectionView?.contentOffset.y))
-        //card.center.y = (self.view?.center.y)!
-        print(card.frame)
         currentCard = card
         
+        // King check
         if(card.card?.rank == "K")
         {
             progressTracker?.rating -= 1
+            if progressTracker?.rating == 0 {
+                print("GAME IS COMPLETE")
+                gameComplete()
+            }
         }
         
         UIView.transition(with: card, duration: 0.5, options: [.transitionFlipFromLeft],
                           animations: {
                             card.center.y = card.originalCenter.y
                             card.center.x = card.originalCenter.x
-                            //card.frame = (self.view?.frame)!
                             self.view.layoutIfNeeded()
-                            
         },
                           completion: { _ in
-                            // TODO: CHANGE INFO FRAME
                             self.informationView = InformationView(frame: CGRect(x: 0, y: card.frame.height/2,width: card.frame.width, height: 0), card: card.card!)
                             card.addSubview(self.informationView!)
                             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
@@ -247,10 +255,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
                             })
         })
     }
-    func delay(_ delay:Double, closure:@escaping ()->()) {
-        let when = DispatchTime.now() + delay
-        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
-    }
+    
     func DismissCard(card: CardCell) {
         self.collectionView?.isScrollEnabled = true
         self.cardSelected = false
@@ -259,8 +264,8 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
             card.center.x = 1000
         }, completion: nil)
         self.progressTracker?.cardsRemaining -= 1
-
-
+        
+        
         
         delay(0.5, closure: {
             card.alpha = 0
@@ -276,7 +281,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     }, completion: nil )
                 }
             }, completion: nil)
-            })
+        })
     }
     
 }
