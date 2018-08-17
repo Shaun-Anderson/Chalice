@@ -17,6 +17,7 @@ class DeckListViewController: UIViewController {
     
     var tableView: UITableView?
     var backButton: UIButton?
+    var titleLabel : UILabel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,22 +26,33 @@ class DeckListViewController: UIViewController {
         
         var y = UIApplication.shared.statusBarFrame.height
         
-        backButton = UIButton(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
+        // Set back button
+        backButton = UIButton(frame: CGRect(x: 25, y: 25, width: 50, height: 50))
         backButton?.backgroundColor = UIColor.red
         backButton?.addTarget(self, action: #selector(self.cancelButtonPressed), for: .touchUpInside)
+        
+        
 
         y += 100
         
         let bottomView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: y), size: CGSize(width: self.view.frame.width, height: self.view.frame.height - y)))
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: bottomView.frame.width, height: bottomView.frame.height))
+        bottomView.round(corners: [.topLeft, .topRight], radius: 10)
+        bottomView.backgroundColor = UIColor.white
+        
+        titleLabel = UILabel(frame: CGRect(x: bottomView.center.x - 100 , y: 25, width: 200, height: 40))
+        
+        titleLabel?.text = toGame == true ? "Toplay" : "customise"
+
+        tableView = UITableView(frame: CGRect(x: 0, y: 100, width: bottomView.frame.width, height: bottomView.frame.height - 100))
         tableView?.register(DeckListTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView?.separatorStyle = .none
         tableView?.rowHeight = 50.0
         tableView?.dataSource = self
         tableView?.delegate = self
         tableView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        bottomView.round(corners: [.topLeft, .topRight], radius: 10)
-        self.view.addSubview(backButton!)
+        
+        bottomView.addSubview(titleLabel!)
+        bottomView.addSubview(backButton!)
         bottomView.addSubview(tableView!)
         self.view.addSubview(bottomView)
     }
