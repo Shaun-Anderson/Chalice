@@ -12,6 +12,7 @@
 		2800FAA521115B200016B010 /* DeckListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800FAA421115B200016B010 /* DeckListViewController.swift */; };
 		2800FAA721115DC00016B010 /* DeckListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800FAA621115DC00016B010 /* DeckListTableViewCell.swift */; };
 		28177E1120E9C7AA009F21FE /* Template.json in Resources */ = {isa = PBXBuildFile; fileRef = 28177E1020E9C7AA009F21FE /* Template.json */; };
+		2827181621269C8500072828 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827181521269C8500072828 /* Constants.swift */; };
 		282D19B3211D714A001FA52F /* Default.json in Resources */ = {isa = PBXBuildFile; fileRef = 282D19B2211D714A001FA52F /* Default.json */; };
 		282EA22E20BCFBC60085514C /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282EA22D20BCFBC60085514C /* NewViewController.swift */; };
 		282EA23020BCFC2E0085514C /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */; };
@@ -41,6 +42,7 @@
 		2800FAA421115B200016B010 /* DeckListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListViewController.swift; sourceTree = "<group>"; };
 		2800FAA621115DC00016B010 /* DeckListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListTableViewCell.swift; sourceTree = "<group>"; };
 		28177E1020E9C7AA009F21FE /* Template.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Template.json; sourceTree = "<group>"; };
+		2827181521269C8500072828 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		282D19B2211D714A001FA52F /* Default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Default.json; sourceTree = "<group>"; };
 		282EA22D20BCFBC60085514C /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		28B0D85B20BBFFDF003BAE81 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2827181521269C8500072828 /* Constants.swift */,
 				28B0D85C20BBFFEC003BAE81 /* Card.swift */,
 			);
 			path = Model;
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28E5FC2A20E7C129000006FD /* CreateViewController.swift in Sources */,
+				2827181621269C8500072828 /* Constants.swift in Sources */,
 				28355F1921119D4B00E467F4 /* PauseMenu.swift in Sources */,
 				28E349ED20E912F9004775E9 /* RuleCell.swift in Sources */,
 				2849A02D20BE8FD80097EB85 /* CardCell.swift in Sources */,
