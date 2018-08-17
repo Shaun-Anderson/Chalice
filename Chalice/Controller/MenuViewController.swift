@@ -94,7 +94,7 @@ class MenuViewController: UIViewController {
     @objc func MoveToCreate (sender: UIButton)
     {
         let nextVC = DeckListViewController()
-        nextVC.view.backgroundColor = UIColor.black
+        nextVC.modalPresentationStyle = .overCurrentContext
         self.present(nextVC, animated: true, completion: nil)
     }
     
