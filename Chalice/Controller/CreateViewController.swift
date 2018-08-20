@@ -52,8 +52,12 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("hello \(ruleset)")
+
         // generate base
-        ruleset = loadJson(filename: "Template")
+        if(ruleset == nil) { ruleset = loadJson(filename: "Template") }
+        originalName = ruleset?.Title
+        
         self.view.backgroundColor = UIColor(red: 14/255, green: 1/255, blue: 26/255, alpha: 1)
 
         var y = UIApplication.shared.statusBarFrame.height
@@ -61,11 +65,12 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         nameTextView = UITextField(frame: CGRect(x: self.view.frame.width/2-100, y: y, width: 200, height: 50))
         nameTextView?.attributedPlaceholder = NSAttributedString(string: "Deck Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
         nameTextView?.textAlignment = .center
-        print("awdkhawoidhawojdaw \(originalName)")
 
         if let name = originalName {
             nameTextView?.text = name
         }
+        nameTextView?.textColor = UIColor.white
+        nameTextView?.text = ruleset?.Title
         
         createButton = UIButton(frame: CGRect(x: self.view.frame.width-75, y: y, width: 50, height: 50))
         createButton?.setTitle("Create", for: .normal)
@@ -187,11 +192,11 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             }
             
-
-            
         } catch {
             print(error)
         }
+        
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Actions
