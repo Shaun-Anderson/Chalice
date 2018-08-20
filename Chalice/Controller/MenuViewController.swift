@@ -22,54 +22,60 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 14/255, green: 1/255, blue: 26/255, alpha: 1)
 
-        mainImage = UIImageView(frame: CGRect(x: view.frame.width/2-75, y: view.frame.height/2-150, width: 150, height: 150))
+        // Main image
+        mainImage = UIImageView(frame: CGRect(x: 25, y: 200, width: 50, height: 50))
         mainImage?.image = #imageLiteral(resourceName: "SplashScreenImage")
+        mainImage?.alpha = 0
         view.addSubview(mainImage!)
         
-        titleLabel = UILabel(frame: CGRect(x: 0, y: 200, width: view.frame.width, height: 100))
-        titleLabel?.textAlignment = .center
+        // Title label
+        titleLabel = UILabel(frame: CGRect(x: 75, y: 200, width: view.frame.width, height: 50))
         titleLabel?.text = "CHALICE"
         titleLabel?.textColor = UIColor.white
-        guard let customFont = UIFont(name: "NordicaThin", size: UIFont.labelFontSize) else {
+        titleLabel?.alpha = 0
+        guard let customFont = UIFont(name: "NordicaThin", size: 32) else {
             fatalError("""
         Failed to load the "CustomFont-Light" font.
         Make sure the font file is included in the project and the font name is spelled correctly.
         """
             )
         }
-        titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
-        titleLabel?.adjustsFontForContentSizeCategory = true
-        
+        titleLabel?.font = customFont
+        //titleLabel?.adjustsFontForContentSizeCategory = true
         view.addSubview(titleLabel!)
         
-        UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.mainImage?.alpha = 1
-            self.mainImage?.center.y = 150
+            self.titleLabel?.alpha = 1
         }, completion: { _ in
             // Create play button.
-            self.playButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height/2, width: self.view.frame.width, height: 50))
+            self.playButton = UIButton(frame: CGRect(x: 25, y: self.view.frame.height/2, width: 100, height: 150))
             self.playButton?.backgroundColor = UIColor.white
+            self.playButton?.fullyRound(diameter: 30)
             self.playButton?.setTitleColor(UIColor.black, for: .normal)
             self.playButton?.setTitle("Play", for: .normal)
             self.playButton?.addTarget(self, action:#selector(self.MoveToPlay), for: .touchUpInside)
             self.view.addSubview(self.playButton!)
             
-            self.createButton = UIButton(frame: CGRect(x: 0, y: self.view.frame.height/2 + 100, width: self.view.frame.width, height: 50))
+            self.createButton = UIButton(frame: CGRect(x: 130, y: self.view.frame.height/2, width: 100, height: 150))
+            self.createButton?.fullyRound(diameter: 30)
             self.createButton?.backgroundColor = UIColor.white
             self.createButton?.setTitleColor(UIColor.black, for: .normal)
             self.createButton?.setTitle("Desks", for: .normal)
             self.createButton?.addTarget(self, action:#selector(self.MoveToCreate), for: .touchUpInside)
             self.view.addSubview(self.createButton!)
             
-            self.rateButton = UIButton(frame: CGRect(x: 50, y: self.view.frame.height - 200, width: 100, height: 50))
+            self.rateButton = UIButton(frame: CGRect(x: 235, y: self.view.frame.height/2, width: 100, height: 150))
             self.rateButton?.backgroundColor = UIColor.green
+            self.rateButton?.fullyRound(diameter: 30)
             self.rateButton?.setTitleColor(UIColor.black, for: .normal)
             self.rateButton?.setTitle("Rate", for: .normal)
             self.rateButton?.addTarget(self, action:#selector(self.rateButtonPressed), for: .touchUpInside)
             self.view.addSubview(self.rateButton!)
             
-            self.optionsButton = UIButton(frame: CGRect(x: 200, y: self.view.frame.height - 200, width: 100, height: 50))
+            self.optionsButton = UIButton(frame: CGRect(x: self.view.frame.width - 100, y: self.view.frame.height - 100, width: 50, height: 50))
             self.optionsButton?.backgroundColor = UIColor.green
+            self.optionsButton?.fullyRound(diameter: 30)
             self.optionsButton?.setTitleColor(UIColor.black, for: .normal)
             self.optionsButton?.setTitle("Options", for: .normal)
             self.optionsButton?.addTarget(self, action:#selector(self.rateButtonPressed), for: .touchUpInside)
