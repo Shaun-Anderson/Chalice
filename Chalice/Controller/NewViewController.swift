@@ -66,8 +66,13 @@ class NewViewController: UIViewController {
         pauseTitle.textColor = UIColor.white
         pauseTitle.textAlignment = .center
         
+        let pauseBackButton = UIButton(frame: CGRect(x: 0, y: 200, width: pauseMenu.frame.width, height: 100))
+        pauseBackButton.addTarget(self, action:#selector(self.returnToHome), for: .touchUpInside)
+        pauseBackButton.setTitle("Back", for: .normal)
+        
         pauseMenu.addSubview(blurEffectView)
         pauseMenu.addSubview(pauseTitle)
+        pauseMenu.addSubview(pauseBackButton)
 
         self.view.addSubview(progressTracker!)
 
@@ -113,6 +118,9 @@ class NewViewController: UIViewController {
         
     }
     
+    ///
+    /// Create the end game view.
+    ///
     func gameComplete () {
         let endGameView = UIView(frame: CGRect(x: 0, y: -self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height))
         endGameView.backgroundColor = Constants.kingColor
@@ -122,9 +130,23 @@ class NewViewController: UIViewController {
         UIView.animate(withDuration: 1, animations: {
             endGameView.center.y = self.view.center.y
         }, completion: {(_ completed: Bool) -> Void in
+            
+            // TODO: set font
+            // End game title
+            let endTextLabel = UILabel(frame: CGRect(x: 0, y: 100, width: self.view.frame.width, height: 500))
+            endTextLabel.text = "The final king has been revealed, you have been selected."
+            endTextLabel.textColor = UIColor.darkGray
+            endTextLabel.numberOfLines = 0
+            endTextLabel.textAlignment = .center
+            endGameView.addSubview(endTextLabel)
+            
+            // Return button
             let returnButton = UIButton(frame: CGRect(x: 0, y: endGameView.frame.height/2, width: endGameView.frame.width, height: 50))
             returnButton.setTitle("Return", for: .normal)
+            returnButton.setTitleColor(UIColor.black, for: .normal)
+            returnButton.target(forAction: #selector(self.returnToHome), withSender: self)
             endGameView.addSubview(returnButton)
+            
         })
         
     }
@@ -132,6 +154,7 @@ class NewViewController: UIViewController {
     func generateDeck(ruleset: ResponseData) -> [Card]? {
         var tempDeck = [Card]()
         var index: Int = 0
+        print(ruleset.Cards)
         for i in 0...3 {
             for j in 0...ruleset.Cards.count-1 {
                 var newCard: Card = ruleset.Cards[j]
@@ -159,6 +182,10 @@ class NewViewController: UIViewController {
             print("Paused")
             pauseButton?.setImage(UIImage(named: "UI_Icon_Play"), for: .normal)
         }
+    }
+    
+    @objc func returnToHome() {
+        dismiss(animated: true, completion: nil)
     }
     
     
