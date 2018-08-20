@@ -12,11 +12,12 @@ class DeckListViewController: UIViewController {
 
     // MARK: - Properties
     
-    var decksNames: [String] = []
+    var decksNames : [String] = []
     var toGame : Bool = false
     
-    var tableView: UITableView?
-    var backButton: UIButton?
+    var tableView : UITableView?
+    var backButton : UIButton?
+    var createButton : UIButton?
     var titleLabel : UILabel?
 
     override func viewDidLoad() {
@@ -28,10 +29,15 @@ class DeckListViewController: UIViewController {
         
         // Set back button
         backButton = UIButton(frame: CGRect(x: 25, y: 25, width: 50, height: 50))
-        backButton?.backgroundColor = UIColor.red
+        backButton?.setTitle("<", for: .normal)
+        backButton?.setTitleColor(UIColor.red, for: .normal)
         backButton?.addTarget(self, action: #selector(self.cancelButtonPressed), for: .touchUpInside)
         
-        
+        // Create Button
+        createButton = UIButton(frame: CGRect(x: self.view.frame.width - 75, y: 25, width: 50, height: 50))
+        createButton?.setTitle("+", for: .normal)
+        createButton?.setTitleColor(UIColor.blue, for: .normal)
+        createButton?.addTarget(self, action: #selector(self.addButtonPressed), for: .touchUpInside)
 
         y += 100
         
@@ -39,9 +45,10 @@ class DeckListViewController: UIViewController {
         bottomView.round(corners: [.topLeft, .topRight], radius: 10)
         bottomView.backgroundColor = UIColor.white
         
-        titleLabel = UILabel(frame: CGRect(x: bottomView.center.x - 100 , y: 25, width: 200, height: 40))
-        
-        titleLabel?.text = toGame == true ? "Toplay" : "customise"
+        titleLabel = UILabel(frame: CGRect(x: 0 , y: 0, width: 0, height: 0))
+        titleLabel?.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel?.textAlignment = .center
+        titleLabel?.text = toGame == true ? "SELECT DECK" : "DECKS"
 
         tableView = UITableView(frame: CGRect(x: 0, y: 100, width: bottomView.frame.width, height: bottomView.frame.height - 100))
         tableView?.register(DeckListTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -53,8 +60,15 @@ class DeckListViewController: UIViewController {
         
         bottomView.addSubview(titleLabel!)
         bottomView.addSubview(backButton!)
+        bottomView.addSubview(createButton!)
         bottomView.addSubview(tableView!)
         self.view.addSubview(bottomView)
+
+        titleLabel?.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 25).isActive = true
+        titleLabel?.leadingAnchor.constraint(equalTo: (backButton?.trailingAnchor)!, constant: 25).isActive = true
+        titleLabel?.trailingAnchor.constraint(equalTo: (createButton?.leadingAnchor)!, constant: -25).isActive = true
+        titleLabel?.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,9 +89,10 @@ class DeckListViewController: UIViewController {
     // MARK: - Other Functions
 
     func loadJson(filename: String) -> ResponseData {
+        
+        // Get default
         if(filename == "Default") {
             if let url = Bundle.main.url(forResource: filename, withExtension: "json") {
-                print("NADS")
                 do {
                     let data = try Data(contentsOf: url)
                     let decoder = JSONDecoder()
@@ -88,8 +103,25 @@ class DeckListViewController: UIViewController {
                 }
             }
         }
-        return ResponseData(Title: "", Cards: [])
         
+        // Get Created Decks
+        do {
+            let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let fileURL = documentsURL.appendingPathComponent(filename).appendingPathExtension("json")
+            do {
+                let data = try Data(contentsOf: fileURL)
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode(ResponseData.self, from: data)
+                return jsonData
+            } catch {
+                print("error:\(error)")
+            }
+        } catch {
+            print(error)
+        }
+        
+        return ResponseData(Title: "", Cards: [])
+
     }
     
     func loadDeckNames () -> [String]
@@ -131,18 +163,21 @@ extension DeckListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(toGame) {
+            // delay error, solution found here: https://stackoverflow.com/questions/21075540/presentviewcontrolleranimatedyes-view-will-not-appear-until-user-taps-again
             
             let nextVC = NewViewController()
             nextVC.ruleSet = loadJson(filename: decksNames[indexPath.row])
-            self.present(nextVC, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(nextVC, animated: true, completion: nil)
+            }
             
         } else {
             
             let nextVC = CreateViewController()
-            print(decksNames[indexPath.row])
-            nextVC.originalName = decksNames[indexPath.row]
-            self.present(nextVC, animated: true, completion: nil)
-            
+            nextVC.ruleset = loadJson(filename: decksNames[indexPath.row])
+            DispatchQueue.main.async {
+                self.present(nextVC, animated: true, completion: nil)
+            }
         }
     }
 }
