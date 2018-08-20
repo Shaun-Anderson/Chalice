@@ -19,7 +19,7 @@ extension UIView {
     func round(corners: UIRectCorner, radius: CGFloat) {
         _ = _round(corners: corners, radius: radius)
     }
-    
+        
     /**
      Rounds the given set of corners to the specified radius with a border
      
@@ -31,6 +31,11 @@ extension UIView {
     func round(corners: UIRectCorner, radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
         let mask = _round(corners: corners, radius: radius)
         addBorder(mask: mask, borderColor: borderColor, borderWidth: borderWidth)
+    }
+    
+    func fullyRound(diameter: CGFloat) {
+        layer.masksToBounds = true
+        layer.cornerRadius = diameter / 2
     }
     
     /**
