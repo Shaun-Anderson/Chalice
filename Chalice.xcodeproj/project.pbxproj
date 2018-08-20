@@ -32,9 +32,20 @@
 		28B0D85D20BBFFEC003BAE81 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0D85C20BBFFEC003BAE81 /* Card.swift */; };
 		28BB5B8820C29F5F00404C77 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB5B8720C29F5F00404C77 /* MenuViewController.swift */; };
 		28BB5B8A20C2A2F100404C77 /* RelativeLayoutUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */; };
+		28D3D77E212A7742002FF483 /* ChaliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3D77D212A7742002FF483 /* ChaliceTests.swift */; };
 		28E349ED20E912F9004775E9 /* RuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E349EC20E912F9004775E9 /* RuleCell.swift */; };
 		28E5FC2A20E7C129000006FD /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E5FC2920E7C129000006FD /* CreateViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		28D3D780212A7742002FF483 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28B0D83820BBEAE4003BAE81 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28B0D83F20BBEAE4003BAE81;
+			remoteInfo = Chalice;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2800FAA0211137400016B010 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
@@ -64,12 +75,22 @@
 		28B0D85C20BBFFEC003BAE81 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		28BB5B8720C29F5F00404C77 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeLayoutUtility.swift; sourceTree = "<group>"; };
+		28D3D77B212A7742002FF483 /* ChaliceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaliceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28D3D77D212A7742002FF483 /* ChaliceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaliceTests.swift; sourceTree = "<group>"; };
+		28D3D77F212A7742002FF483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28E349EC20E912F9004775E9 /* RuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCell.swift; sourceTree = "<group>"; };
 		28E5FC2920E7C129000006FD /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		28B0D83D20BBEAE4003BAE81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28D3D778212A7742002FF483 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -100,10 +121,19 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		288F1B5A2127F12600EB1B59 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				28600A3721253ADC00A7B957 /* UIView+RoundedCorners.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		28B0D83720BBEAE4003BAE81 = {
 			isa = PBXGroup;
 			children = (
 				28B0D84220BBEAE4003BAE81 /* Chalice */,
+				28D3D77C212A7742002FF483 /* ChaliceTests */,
 				28B0D84120BBEAE4003BAE81 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				28B0D84020BBEAE4003BAE81 /* Chalice.app */,
+				28D3D77B212A7742002FF483 /* ChaliceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,14 +176,14 @@
 		28B0D86120BC3921003BAE81 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				288F1B5A2127F12600EB1B59 /* Extensions */,
 				286C7E7220BD1A0B00EF064A /* InformationView.swift */,
 				2800FAA821115E690016B010 /* TableCells */,
 				2880791320E6237500A0FFC1 /* ProgressView.swift */,
 				282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */,
-				2800FAA0211137400016B010 /* PaddedTextField.swift */,
 				2800FAA22111379D0016B010 /* PaddedUILabel.swift */,
+				2800FAA0211137400016B010 /* PaddedTextField.swift */,
 				28355F1821119D4B00E467F4 /* PauseMenu.swift */,
-				28600A3721253ADC00A7B957 /* UIView+RoundedCorners.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -178,6 +209,15 @@
 			path = SupportFiles;
 			sourceTree = "<group>";
 		};
+		28D3D77C212A7742002FF483 /* ChaliceTests */ = {
+			isa = PBXGroup;
+			children = (
+				28D3D77D212A7742002FF483 /* ChaliceTests.swift */,
+				28D3D77F212A7742002FF483 /* Info.plist */,
+			);
+			path = ChaliceTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -198,6 +238,24 @@
 			productReference = 28B0D84020BBEAE4003BAE81 /* Chalice.app */;
 			productType = "com.apple.product-type.application";
 		};
+		28D3D77A212A7742002FF483 /* ChaliceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28D3D784212A7742002FF483 /* Build configuration list for PBXNativeTarget "ChaliceTests" */;
+			buildPhases = (
+				28D3D777212A7742002FF483 /* Sources */,
+				28D3D778212A7742002FF483 /* Frameworks */,
+				28D3D779212A7742002FF483 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28D3D781212A7742002FF483 /* PBXTargetDependency */,
+			);
+			name = ChaliceTests;
+			productName = ChaliceTests;
+			productReference = 28D3D77B212A7742002FF483 /* ChaliceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -211,6 +269,11 @@
 					28B0D83F20BBEAE4003BAE81 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+					};
+					28D3D77A212A7742002FF483 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 28B0D83F20BBEAE4003BAE81;
 					};
 				};
 			};
@@ -228,6 +291,7 @@
 			projectRoot = "";
 			targets = (
 				28B0D83F20BBEAE4003BAE81 /* Chalice */,
+				28D3D77A212A7742002FF483 /* ChaliceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -245,6 +309,13 @@
 				28355F172111966500E467F4 /* NordicaRegular.otf in Resources */,
 				28B0D84E20BBEAE4003BAE81 /* Assets.xcassets in Resources */,
 				28355F1D2111B4DE00E467F4 /* Odin Rounded - Bold.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28D3D779212A7742002FF483 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +348,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28D3D777212A7742002FF483 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28D3D77E212A7742002FF483 /* ChaliceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		28D3D781212A7742002FF483 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28B0D83F20BBEAE4003BAE81 /* Chalice */;
+			targetProxy = 28D3D780212A7742002FF483 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		28B0D84F20BBEAE4003BAE81 /* LaunchScreen.storyboard */ = {
@@ -426,6 +513,38 @@
 			};
 			name = Release;
 		};
+		28D3D782212A7742002FF483 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X9T272DK2T;
+				INFOPLIST_FILE = ChaliceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ando.ChaliceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chalice.app/Chalice";
+			};
+			name = Debug;
+		};
+		28D3D783212A7742002FF483 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X9T272DK2T;
+				INFOPLIST_FILE = ChaliceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ando.ChaliceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chalice.app/Chalice";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -443,6 +562,15 @@
 			buildConfigurations = (
 				28B0D85620BBEAE4003BAE81 /* Debug */,
 				28B0D85720BBEAE4003BAE81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28D3D784212A7742002FF483 /* Build configuration list for PBXNativeTarget "ChaliceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28D3D782212A7742002FF483 /* Debug */,
+				28D3D783212A7742002FF483 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
