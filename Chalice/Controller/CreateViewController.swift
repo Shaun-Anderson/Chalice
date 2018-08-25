@@ -73,13 +73,14 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         nameTextView?.text = ruleset?.Title
         
         createButton = UIButton(frame: CGRect(x: self.view.frame.width-75, y: y, width: 50, height: 50))
-        createButton?.setTitle("Create", for: .normal)
-        createButton?.backgroundColor = UIColor.green
+        //createButton?.setTitle("Create", for: .normal)
+        createButton?.setImage(UIImage(named: "TickIcon"), for: .normal)
+        createButton?.tintColor = UIColor.green
         createButton?.addTarget(self, action: #selector(self.saveFile), for: .touchUpInside)
 
         cancelButton = UIButton(frame: CGRect(x: 25, y: y, width: 50, height: 50))
-        cancelButton?.setTitle("Cancel", for: .normal)
-        cancelButton?.backgroundColor = UIColor.red
+        cancelButton?.setImage(UIImage(named: "CrossIcon"), for: .normal)
+        cancelButton?.tintColor = UIColor.red
         cancelButton?.addTarget(self, action: #selector(self.cancelButtonPressed), for: .touchUpInside)
         
         y += 100
@@ -142,7 +143,7 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         do {
             
             let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
-            let fileURL = documentDirectory.appendingPathComponent((ruleset?.Title)!).appendingPathExtension("json")
+            var fileURL = documentDirectory.appendingPathComponent((ruleset?.Title)!).appendingPathExtension("json")
             
             // If was editing an already create file just rename and change data.
             if let ogName = originalName {
@@ -155,7 +156,7 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     var resourceValues = URLResourceValues()
                     resourceValues.name = ruleset?.Title
                     try originPath.setResourceValues(resourceValues)
-                    
+
                 } catch {
                     print(error)
                 }
@@ -163,9 +164,26 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             // Check if file with title already exists.
             if fileManager.fileExists(atPath: fileURL.path) {
-                
                 // TODO: Create alert for overwrite.
-                
+                let alert = AlertManager.confirmAlert(title: "Overwrite ruleset", message: "Confirm overwrite", ok: "Confirm", cancel: "Cancel", okHandler: { (action, controller) in
+                    
+                    do {
+                        let file = try FileHandle(forWritingTo: fileURL)
+                        // Set Data
+                        file.write(encodedData!)
+                        // Change Name
+                        var resourceValues = URLResourceValues()
+                        resourceValues.name = self.ruleset?.Title
+                        try fileURL.setResourceValues(resourceValues)
+                        
+                        // TODO: Dismiss
+                    } catch {
+                        print(error)
+                    }
+                   
+                })
+                self.present(alert, animated: true, completion: nil)
+
             }
             else {
                 
@@ -196,7 +214,6 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print(error)
         }
         
-        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Actions
