@@ -33,6 +33,7 @@
 		28BB5B8820C29F5F00404C77 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB5B8720C29F5F00404C77 /* MenuViewController.swift */; };
 		28BB5B8A20C2A2F100404C77 /* RelativeLayoutUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */; };
 		28D3D77E212A7742002FF483 /* ChaliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3D77D212A7742002FF483 /* ChaliceTests.swift */; };
+		28D3D786212A8953002FF483 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3D785212A8953002FF483 /* AlertManager.swift */; };
 		28E349ED20E912F9004775E9 /* RuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E349EC20E912F9004775E9 /* RuleCell.swift */; };
 		28E5FC2A20E7C129000006FD /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E5FC2920E7C129000006FD /* CreateViewController.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,7 @@
 		28D3D77B212A7742002FF483 /* ChaliceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaliceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D3D77D212A7742002FF483 /* ChaliceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaliceTests.swift; sourceTree = "<group>"; };
 		28D3D77F212A7742002FF483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28D3D785212A8953002FF483 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		28E349EC20E912F9004775E9 /* RuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCell.swift; sourceTree = "<group>"; };
 		28E5FC2920E7C129000006FD /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,6 +207,7 @@
 				28B0D84320BBEAE4003BAE81 /* AppDelegate.swift */,
 				286C7E7420BD461300EF064A /* Extensions.swift */,
 				28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */,
+				28D3D785212A8953002FF483 /* AlertManager.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				2800FAA521115B200016B010 /* DeckListViewController.swift in Sources */,
 				286C7E7520BD461300EF064A /* Extensions.swift in Sources */,
 				28BB5B8A20C2A2F100404C77 /* RelativeLayoutUtility.swift in Sources */,
+				28D3D786212A8953002FF483 /* AlertManager.swift in Sources */,
 				282EA23020BCFC2E0085514C /* UPCarouselFlowLayout.swift in Sources */,
 				282EA22E20BCFBC60085514C /* NewViewController.swift in Sources */,
 				2800FAA721115DC00016B010 /* DeckListTableViewCell.swift in Sources */,
