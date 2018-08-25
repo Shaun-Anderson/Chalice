@@ -29,8 +29,8 @@ class DeckListViewController: UIViewController {
         
         // Set back button
         backButton = UIButton(frame: CGRect(x: 25, y: 25, width: 50, height: 50))
-        backButton?.setTitle("<", for: .normal)
-        backButton?.setTitleColor(UIColor.red, for: .normal)
+        backButton?.setImage(#imageLiteral(resourceName: "CrossIcon"), for: .normal)
+        backButton?.tintColor = UIColor.red
         backButton?.addTarget(self, action: #selector(self.cancelButtonPressed), for: .touchUpInside)
         
         // Create Button
