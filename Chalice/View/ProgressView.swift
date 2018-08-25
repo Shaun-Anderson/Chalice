@@ -8,9 +8,6 @@
 
 import UIKit
 
-/// A simple rating view that can set whole, half or floating point ratings.
-@IBDesignable
-@objcMembers
 open class ProgressView: UIView {
     
     // MARK: Properties
