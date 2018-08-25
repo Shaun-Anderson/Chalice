@@ -9,11 +9,16 @@
 import UIKit
 
 class InformationView: UIView {
+    
+    // MARK: - Properties
+    
     var helpLabel: UILabel
     var actionNameLabel: UILabel
     var actionDescLabel: UILabel
     var rankLabel: UILabel
     var suitImageView: UIImageView
+    
+    // MARK: - Initialisaiton
     
     init(frame: CGRect, card: Card) {
         helpLabel = UILabel(frame: CGRect.zero)
@@ -48,6 +53,7 @@ class InformationView: UIView {
         self.actionNameLabel.text = card.actionName.uppercased()
         self.actionNameLabel.textColor = UIColor.white
         self.actionNameLabel.textAlignment = NSTextAlignment.right
+        self.actionNameLabel.alpha = 0
         self.actionNameLabel.font = lightFont
         
         self.actionDescLabel.text = card.actionDescription
@@ -59,14 +65,6 @@ class InformationView: UIView {
 
         self.actionDescLabel.font = lightFont
         actionDescLabel.font = helpLabel.font.withSize(14)
-
-        
-//        self.rankLabel.text = card.rank
-//        self.rankLabel.textColor = UIColor.white
-//        self.rankLabel.textAlignment = NSTextAlignment.right
-//        self.rankLabel.font = boldFont
-        
-//        self.suitImageView.image = UIImage(named: (card.suit?.rawValue)!)
         
         // TODO: set text and size
         self.backgroundColor = UIColor(white: 0, alpha: 0.75)
@@ -88,7 +86,11 @@ class InformationView: UIView {
         actionDescLabel.frame = CGRect(x: 25, y: 75, width: frame.width - 50, height: frame.height-150)
         UIView.animate(withDuration: 0.5, animations: {
             self.actionDescLabel.alpha = 1
+            self.actionNameLabel.alpha = 1
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.5, animations: {
             self.helpLabel.alpha = 1
+            })
         })
     }
     
