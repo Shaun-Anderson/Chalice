@@ -45,16 +45,16 @@ class RuleCell: UITableViewCell, UITextFieldDelegate, UITextViewDelegate {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.clear
         
-        //titleLabel.textAlignment = .center
-        titleLabel.textColor = UIColor.white
-        titleLabel.backgroundColor = UIColor.gray
+        titleLabel.textColor = UIColor.black
+        titleLabel.backgroundColor = UIColor.lightGray
         actionNameInput.attributedPlaceholder = NSAttributedString(string: "Action Name",
-                                                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+                                                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
         actionNameInput.textColor = UIColor.black
         actionNameInput.delegate = self
         
         actionDescInput.backgroundColor = UIColor.clear
-        actionDescInput.font = UIFont(name: "Helvetica", size: 16)
+        actionDescInput.font = UIFont(name: "Helvetica", size: 14)
+        
         actionDescInput.delegate = self
         actionDescInput.textColor = UIColor.darkGray
         
@@ -70,9 +70,9 @@ class RuleCell: UITableViewCell, UITextFieldDelegate, UITextViewDelegate {
         backView.frame = CGRect(x: 5, y: 5, width: self.frame.width - 10, height: self.frame.height - 5 )
         validView.frame = CGRect(x: 0, y: 0, width: 10, height: self.frame.height - 5)
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 30)
-        actionNameInput.frame = CGRect(x: 35, y: 30, width: self.frame.width, height: 30)
-        actionDescInput.frame = CGRect(x: 35, y: 60, width: self.frame.width, height: 60)
-        actionNameInput.setBottomBorder(color: UIColor.white, size: 1)
+        actionNameInput.frame = CGRect(x: 10, y: 30, width: self.frame.width, height: 30)
+        actionDescInput.frame = CGRect(x: 10, y: 60, width: self.frame.width, height: 60)
+        actionNameInput.setBottomBorder(color: UIColor.black, size: 2)
     }
     
     func errorCheck() {
