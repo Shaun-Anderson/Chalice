@@ -16,7 +16,7 @@ class MenuViewController: UIViewController {
     var optionsButton: UIButton?
     var mainImage: UIImageView?
     var titleLabel: UILabel?
-    
+    var buttonStack: UIStackView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,43 +44,70 @@ class MenuViewController: UIViewController {
         //titleLabel?.adjustsFontForContentSizeCategory = true
         view.addSubview(titleLabel!)
         
+        self.buttonStack = UIStackView(frame: CGRect(x: 10, y: 300, width: self.view.frame.width-20, height: self.view.frame.height/3))
+        buttonStack?.distribution = .fillEqually
+        buttonStack?.spacing = 10
+    
+        // Create play button.
+        self.playButton = UIButton(frame: CGRect(x: 25, y: self.view.frame.height/2, width: UIDevice.current.userInterfaceIdiom == .phone ? 100 : 200, height: 150))
+        self.playButton?.backgroundColor = UIColor.white
+        self.playButton?.fullyRound(diameter: 30)
+        self.playButton?.setTitleColor(UIColor.black, for: .normal)
+        self.playButton?.setTitle("Play", for: .normal)
+        self.playButton?.addTarget(self, action:#selector(self.MoveToPlay), for: .touchUpInside)
+        self.buttonStack?.addArrangedSubview(self.playButton!)
+        
+        self.createButton = UIButton(frame: CGRect(x: 130, y: self.view.frame.height/2, width: 100, height: 150))
+        self.createButton?.fullyRound(diameter: 30)
+        self.createButton?.backgroundColor = UIColor.white
+        self.createButton?.setTitleColor(UIColor.black, for: .normal)
+        self.createButton?.setTitle("Desks", for: .normal)
+        self.createButton?.addTarget(self, action:#selector(self.MoveToCreate), for: .touchUpInside)
+        self.buttonStack?.addArrangedSubview(self.createButton!)
+        
+        self.rateButton = UIButton(frame: CGRect(x: 235, y: self.view.frame.height/2, width: 100, height: 150))
+        self.rateButton?.backgroundColor = UIColor.green
+        self.rateButton?.fullyRound(diameter: 30)
+        self.rateButton?.setTitleColor(UIColor.black, for: .normal)
+        self.rateButton?.setTitle("Rate", for: .normal)
+        self.rateButton?.addTarget(self, action:#selector(self.rateButtonPressed), for: .touchUpInside)
+        self.buttonStack?.addArrangedSubview(self.rateButton!)
+        
+        self.optionsButton = UIButton(frame: CGRect(x: self.view.frame.width - 100, y: self.view.frame.height - 100, width: 50, height: 50))
+        self.optionsButton?.backgroundColor = UIColor.green
+        self.optionsButton?.fullyRound(diameter: 30)
+        self.optionsButton?.setTitleColor(UIColor.black, for: .normal)
+        self.optionsButton?.setTitle("Options", for: .normal)
+        self.optionsButton?.addTarget(self, action:#selector(self.rateButtonPressed), for: .touchUpInside)
+        self.buttonStack?.addArrangedSubview(self.optionsButton!)
+        
+        view.addSubview(self.buttonStack!);
+        
+        
         UIView.animate(withDuration: 1, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.mainImage?.alpha = 1
             self.titleLabel?.alpha = 1
         }, completion: { _ in
-            // Create play button.
-            self.playButton = UIButton(frame: CGRect(x: 25, y: self.view.frame.height/2, width: 100, height: 150))
-            self.playButton?.backgroundColor = UIColor.white
-            self.playButton?.fullyRound(diameter: 30)
-            self.playButton?.setTitleColor(UIColor.black, for: .normal)
-            self.playButton?.setTitle("Play", for: .normal)
-            self.playButton?.addTarget(self, action:#selector(self.MoveToPlay), for: .touchUpInside)
-            self.view.addSubview(self.playButton!)
             
-            self.createButton = UIButton(frame: CGRect(x: 130, y: self.view.frame.height/2, width: 100, height: 150))
-            self.createButton?.fullyRound(diameter: 30)
-            self.createButton?.backgroundColor = UIColor.white
-            self.createButton?.setTitleColor(UIColor.black, for: .normal)
-            self.createButton?.setTitle("Desks", for: .normal)
-            self.createButton?.addTarget(self, action:#selector(self.MoveToCreate), for: .touchUpInside)
-            self.view.addSubview(self.createButton!)
-            
-            self.rateButton = UIButton(frame: CGRect(x: 235, y: self.view.frame.height/2, width: 100, height: 150))
-            self.rateButton?.backgroundColor = UIColor.green
-            self.rateButton?.fullyRound(diameter: 30)
-            self.rateButton?.setTitleColor(UIColor.black, for: .normal)
-            self.rateButton?.setTitle("Rate", for: .normal)
-            self.rateButton?.addTarget(self, action:#selector(self.rateButtonPressed), for: .touchUpInside)
-            self.view.addSubview(self.rateButton!)
-            
-            self.optionsButton = UIButton(frame: CGRect(x: self.view.frame.width - 100, y: self.view.frame.height - 100, width: 50, height: 50))
-            self.optionsButton?.backgroundColor = UIColor.green
-            self.optionsButton?.fullyRound(diameter: 30)
-            self.optionsButton?.setTitleColor(UIColor.black, for: .normal)
-            self.optionsButton?.setTitle("Options", for: .normal)
-            self.optionsButton?.addTarget(self, action:#selector(self.rateButtonPressed), for: .touchUpInside)
-            self.view.addSubview(self.optionsButton!)
+
+
+
         })
+        
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
+        
+//        let topConstraint = NSLayoutConstraint(item: buttonStack!, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.titleLabel, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 50)
+//
+//        let bottomConsraint = NSLayoutConstraint(item: buttonStack!, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -100)
+//
+//        buttonStack?.addConstraints([topConstraint, bottomConsraint])
+
+    }
+    
+    override func viewWillLayoutSubviews() {
 
     }
 
