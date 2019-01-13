@@ -14,7 +14,7 @@
 		28177E1120E9C7AA009F21FE /* Template.json in Resources */ = {isa = PBXBuildFile; fileRef = 28177E1020E9C7AA009F21FE /* Template.json */; };
 		2827181621269C8500072828 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827181521269C8500072828 /* Constants.swift */; };
 		282D19B3211D714A001FA52F /* Default.json in Resources */ = {isa = PBXBuildFile; fileRef = 282D19B2211D714A001FA52F /* Default.json */; };
-		282EA22E20BCFBC60085514C /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282EA22D20BCFBC60085514C /* NewViewController.swift */; };
+		282EA22E20BCFBC60085514C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282EA22D20BCFBC60085514C /* MainViewController.swift */; };
 		282EA23020BCFC2E0085514C /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */; };
 		28355F152111945F00E467F4 /* NordicaThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28355F142111945F00E467F4 /* NordicaThin.otf */; };
 		28355F172111966500E467F4 /* NordicaRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28355F162111966500E467F4 /* NordicaRegular.otf */; };
@@ -32,6 +32,8 @@
 		28B0D85D20BBFFEC003BAE81 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0D85C20BBFFEC003BAE81 /* Card.swift */; };
 		28BB5B8820C29F5F00404C77 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB5B8720C29F5F00404C77 /* MenuViewController.swift */; };
 		28BB5B8A20C2A2F100404C77 /* RelativeLayoutUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */; };
+		28C4041721EAD9220086ED30 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28C4041621EAD9220086ED30 /* Quicksand-Bold.otf */; };
+		28C4041921EADE100086ED30 /* EmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C4041821EADE100086ED30 /* EmitterView.swift */; };
 		28D3D77E212A7742002FF483 /* ChaliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3D77D212A7742002FF483 /* ChaliceTests.swift */; };
 		28D3D786212A8953002FF483 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3D785212A8953002FF483 /* AlertManager.swift */; };
 		28E349ED20E912F9004775E9 /* RuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E349EC20E912F9004775E9 /* RuleCell.swift */; };
@@ -56,7 +58,7 @@
 		28177E1020E9C7AA009F21FE /* Template.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Template.json; sourceTree = "<group>"; };
 		2827181521269C8500072828 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		282D19B2211D714A001FA52F /* Default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Default.json; sourceTree = "<group>"; };
-		282EA22D20BCFBC60085514C /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		282EA22D20BCFBC60085514C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		282EA22F20BCFC2E0085514C /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
 		28355F142111945F00E467F4 /* NordicaThin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NordicaThin.otf; path = ../../../../Documents/Fonts/nordica/NordicaThin.otf; sourceTree = "<group>"; };
 		28355F162111966500E467F4 /* NordicaRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NordicaRegular.otf; path = ../../../../Documents/Fonts/nordica/NordicaRegular.otf; sourceTree = "<group>"; };
@@ -76,6 +78,8 @@
 		28B0D85C20BBFFEC003BAE81 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		28BB5B8720C29F5F00404C77 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeLayoutUtility.swift; sourceTree = "<group>"; };
+		28C4041621EAD9220086ED30 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Bold.otf"; path = "../../../../Downloads/quicksand/Quicksand-Bold.otf"; sourceTree = "<group>"; };
+		28C4041821EADE100086ED30 /* EmitterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmitterView.swift; sourceTree = "<group>"; };
 		28D3D77B212A7742002FF483 /* ChaliceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaliceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D3D77D212A7742002FF483 /* ChaliceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaliceTests.swift; sourceTree = "<group>"; };
 		28D3D77F212A7742002FF483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 		286C7E7620BD4F8E00EF064A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				28C4041621EAD9220086ED30 /* Quicksand-Bold.otf */,
 				28355F142111945F00E467F4 /* NordicaThin.otf */,
 				28355F1A2111ABFC00E467F4 /* Quicksand_Book.otf */,
 				28355F1C2111B4DE00E467F4 /* Odin Rounded - Bold.otf */,
@@ -186,6 +191,7 @@
 				2800FAA22111379D0016B010 /* PaddedUILabel.swift */,
 				2800FAA0211137400016B010 /* PaddedTextField.swift */,
 				28355F1821119D4B00E467F4 /* PauseMenu.swift */,
+				28C4041821EADE100086ED30 /* EmitterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -193,7 +199,7 @@
 		28B0D86220BC3927003BAE81 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				282EA22D20BCFBC60085514C /* NewViewController.swift */,
+				282EA22D20BCFBC60085514C /* MainViewController.swift */,
 				28BB5B8720C29F5F00404C77 /* MenuViewController.swift */,
 				28E5FC2920E7C129000006FD /* CreateViewController.swift */,
 				2800FAA421115B200016B010 /* DeckListViewController.swift */,
@@ -266,7 +272,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Shaun Anderson";
 				TargetAttributes = {
 					28B0D83F20BBEAE4003BAE81 = {
@@ -310,6 +316,7 @@
 				28355F1B2111ABFC00E467F4 /* Quicksand_Book.otf in Resources */,
 				28B0D85120BBEAE4003BAE81 /* LaunchScreen.storyboard in Resources */,
 				28355F172111966500E467F4 /* NordicaRegular.otf in Resources */,
+				28C4041721EAD9220086ED30 /* Quicksand-Bold.otf in Resources */,
 				28B0D84E20BBEAE4003BAE81 /* Assets.xcassets in Resources */,
 				28355F1D2111B4DE00E467F4 /* Odin Rounded - Bold.otf in Resources */,
 			);
@@ -343,11 +350,12 @@
 				28BB5B8A20C2A2F100404C77 /* RelativeLayoutUtility.swift in Sources */,
 				28D3D786212A8953002FF483 /* AlertManager.swift in Sources */,
 				282EA23020BCFC2E0085514C /* UPCarouselFlowLayout.swift in Sources */,
-				282EA22E20BCFBC60085514C /* NewViewController.swift in Sources */,
+				282EA22E20BCFBC60085514C /* MainViewController.swift in Sources */,
 				2800FAA721115DC00016B010 /* DeckListTableViewCell.swift in Sources */,
 				2880791420E6237500A0FFC1 /* ProgressView.swift in Sources */,
 				28600A3821253ADC00A7B957 /* UIView+RoundedCorners.swift in Sources */,
 				28B0D85D20BBFFEC003BAE81 /* Card.swift in Sources */,
+				28C4041921EADE100086ED30 /* EmitterView.swift in Sources */,
 				28BB5B8820C29F5F00404C77 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +404,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -403,6 +412,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -453,6 +463,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -460,6 +471,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -494,6 +506,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X9T272DK2T;
 				INFOPLIST_FILE = "$(SRCROOT)/Chalice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ANDO.Chalice;
@@ -508,6 +521,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X9T272DK2T;
 				INFOPLIST_FILE = "$(SRCROOT)/Chalice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ANDO.Chalice;

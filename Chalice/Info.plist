@@ -24,7 +24,8 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Odin Rounded - Bold</string>
+		<string>Quicksand-Bold.otf</string>
+		<string>Odin Rounded - Bold.otf</string>
 		<string>NordicaRegular.otf</string>
 		<string>NordicaThin.otf</string>
 		<string>Quicksand_Book.otf</string>
