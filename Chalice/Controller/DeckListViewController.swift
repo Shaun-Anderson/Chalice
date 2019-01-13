@@ -165,7 +165,7 @@ extension DeckListViewController: UITableViewDelegate {
         if(toGame) {
             // delay error, solution found here: https://stackoverflow.com/questions/21075540/presentviewcontrolleranimatedyes-view-will-not-appear-until-user-taps-again
             
-            let nextVC = NewViewController()
+            let nextVC = MainViewController()
             nextVC.ruleSet = loadJson(filename: decksNames[indexPath.row])
             DispatchQueue.main.async {
                 self.present(nextVC, animated: true, completion: nil)
