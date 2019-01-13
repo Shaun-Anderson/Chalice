@@ -59,7 +59,9 @@ class CardCell: UICollectionViewCell {
         leftSwipeGesture = UISwipeGestureRecognizer()
         rightSwipeGesture = UISwipeGestureRecognizer()
 
-        guard let boldFont = UIFont(name: "QuicksandBook-Regular", size: UIFont.labelFontSize) else {
+        // Font Names:
+        // Odin-Bold
+        guard let boldFont = UIFont(name: "Quicksand-Bold", size: UIFont.labelFontSize) else {
             fatalError("""
         Failed to load the "CustomFont-Light" font.
         Make sure the font file is included in the project and the font name is spelled correctly.
@@ -136,11 +138,11 @@ class CardCell: UICollectionViewCell {
         topText.text = card?.rank
         topText.textAlignment = NSTextAlignment.center
         topSuit.image = UIImage(named: (card?.suit?.rawValue)!)
-        topSuit.tintColor = UIColor.darkGray
+        topSuit.tintColor = UIColor.black
         bottomText.text = card?.rank
         bottomText.textAlignment = NSTextAlignment.center
         bottomSuit.image = UIImage(named: (card?.suit?.rawValue)!)
-        bottomSuit.tintColor = UIColor.darkGray
+        bottomSuit.tintColor = UIColor.black
         bottomText.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         bottomSuit.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
     }
