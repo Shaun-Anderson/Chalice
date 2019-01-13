@@ -122,7 +122,7 @@ class MainViewController: UIViewController {
     /// Create the end game view.
     ///
     func gameComplete () {
-        let endGameView = UIView(frame: CGRect(x: 0, y: -self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height))
+        let endGameView = EmitterView(frame: CGRect(x: 0, y: -self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height))
         endGameView.backgroundColor = Constants.kingColor
         self.view.addSubview(endGameView)
 
@@ -130,20 +130,26 @@ class MainViewController: UIViewController {
         UIView.animate(withDuration: 1, animations: {
             endGameView.center.y = self.view.center.y
         }, completion: {(_ completed: Bool) -> Void in
-            
+            endGameView.setup()
+            endGameView.emit()
             // TODO: set font
             // End game title
-            let endTextLabel = UILabel(frame: CGRect(x: 0, y: 100, width: self.view.frame.width, height: 500))
-            endTextLabel.text = "The final king has been revealed, you have been selected."
+            let endTextLabel = UILabel(frame: CGRect(x: 0, y: self.view.frame.height/2, width: self.view.frame.width, height: 50))
+            endTextLabel.text = "You have been selected as the final king!"
             endTextLabel.textColor = UIColor.darkGray
             endTextLabel.numberOfLines = 0
             endTextLabel.textAlignment = .center
             endGameView.addSubview(endTextLabel)
             
+            let victoryImage = UIImageView(frame: CGRect(x: self.view.frame.width/2 - 75, y: self.view.frame.height/2 - 100, width: 150, height: 75))
+            victoryImage.image = UIImage(named: "VictoryBanner")
+            endGameView.addSubview(victoryImage)
+            
             // Return button
-            let returnButton = UIButton(frame: CGRect(x: 0, y: endGameView.frame.height/2, width: endGameView.frame.width, height: 50))
+            let returnButton = UIButton(frame: CGRect(x: 0, y: endGameView.frame.height - 100, width: endGameView.frame.width, height: 50))
             returnButton.setTitle("Return", for: .normal)
-            returnButton.setTitleColor(UIColor.black, for: .normal)
+            returnButton.setTitleColor(UIColor.white, for: .normal)
+            returnButton.backgroundColor = UIColor.black;
             returnButton.target(forAction: #selector(self.returnToHome), withSender: self)
             endGameView.addSubview(returnButton)
             
@@ -185,6 +191,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func returnToHome() {
+        print("ReturnToHome")
         dismiss(animated: true, completion: nil)
     }
     
