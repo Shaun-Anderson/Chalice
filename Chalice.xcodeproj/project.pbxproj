@@ -34,6 +34,7 @@
 		28BB5B8A20C2A2F100404C77 /* RelativeLayoutUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */; };
 		28C4041721EAD9220086ED30 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28C4041621EAD9220086ED30 /* Quicksand-Bold.otf */; };
 		28C4041921EADE100086ED30 /* EmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C4041821EADE100086ED30 /* EmitterView.swift */; };
+		28C4041B21EAEDA10086ED30 /* PlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C4041A21EAEDA10086ED30 /* PlaceHolderTextView.swift */; };
 		28D3D77E212A7742002FF483 /* ChaliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3D77D212A7742002FF483 /* ChaliceTests.swift */; };
 		28D3D786212A8953002FF483 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3D785212A8953002FF483 /* AlertManager.swift */; };
 		28E349ED20E912F9004775E9 /* RuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E349EC20E912F9004775E9 /* RuleCell.swift */; };
@@ -80,6 +81,7 @@
 		28BB5B8920C2A2F100404C77 /* RelativeLayoutUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeLayoutUtility.swift; sourceTree = "<group>"; };
 		28C4041621EAD9220086ED30 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Bold.otf"; path = "../../../../Downloads/quicksand/Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		28C4041821EADE100086ED30 /* EmitterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmitterView.swift; sourceTree = "<group>"; };
+		28C4041A21EAEDA10086ED30 /* PlaceHolderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolderTextView.swift; sourceTree = "<group>"; };
 		28D3D77B212A7742002FF483 /* ChaliceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaliceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D3D77D212A7742002FF483 /* ChaliceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaliceTests.swift; sourceTree = "<group>"; };
 		28D3D77F212A7742002FF483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				2800FAA0211137400016B010 /* PaddedTextField.swift */,
 				28355F1821119D4B00E467F4 /* PauseMenu.swift */,
 				28C4041821EADE100086ED30 /* EmitterView.swift */,
+				28C4041A21EAEDA10086ED30 /* PlaceHolderTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				28B0D85D20BBFFEC003BAE81 /* Card.swift in Sources */,
 				28C4041921EADE100086ED30 /* EmitterView.swift in Sources */,
 				28BB5B8820C29F5F00404C77 /* MenuViewController.swift in Sources */,
+				28C4041B21EAEDA10086ED30 /* PlaceHolderTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

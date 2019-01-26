@@ -126,12 +126,17 @@ class MainViewController: UIViewController {
         endGameView.backgroundColor = Constants.kingColor
         self.view.addSubview(endGameView)
 
+        let victoryImage = UIImageView(frame: CGRect(x: self.view.frame.width/2 - 75, y: self.view.frame.height/2 - 100, width: 150, height: 75))
+        victoryImage.image = UIImage(named: "VictoryBanner")
+        endGameView.addSubview(victoryImage)
+        
+        endGameView.setup()
+        endGameView.emit()
         UIView.setAnimationCurve(UIViewAnimationCurve.easeOut)
         UIView.animate(withDuration: 1, animations: {
             endGameView.center.y = self.view.center.y
         }, completion: {(_ completed: Bool) -> Void in
-            endGameView.setup()
-            endGameView.emit()
+
             // TODO: set font
             // End game title
             let endTextLabel = UILabel(frame: CGRect(x: 0, y: self.view.frame.height/2, width: self.view.frame.width, height: 50))
@@ -141,16 +146,14 @@ class MainViewController: UIViewController {
             endTextLabel.textAlignment = .center
             endGameView.addSubview(endTextLabel)
             
-            let victoryImage = UIImageView(frame: CGRect(x: self.view.frame.width/2 - 75, y: self.view.frame.height/2 - 100, width: 150, height: 75))
-            victoryImage.image = UIImage(named: "VictoryBanner")
-            endGameView.addSubview(victoryImage)
-            
+
             // Return button
             let returnButton = UIButton(frame: CGRect(x: 0, y: endGameView.frame.height - 100, width: endGameView.frame.width, height: 50))
             returnButton.setTitle("Return", for: .normal)
             returnButton.setTitleColor(UIColor.white, for: .normal)
             returnButton.backgroundColor = UIColor.black;
-            returnButton.target(forAction: #selector(self.returnToHome), withSender: self)
+            returnButton.addTarget(self, action:#selector(self.returnToHome), for: .touchUpInside)
+
             endGameView.addSubview(returnButton)
             
         })
